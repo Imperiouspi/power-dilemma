@@ -2,7 +2,13 @@ import Phaser from 'phaser'
 
 const DUDE_KEY = 'dude'
 const WALL_KEY = 'wall'
+const APPLIANCE_KEY = 'appliance'
+
 const speed = 300
+const reach = 20
+var offsetX = -1
+var offsetY = 0
+var e
 
 export default class RoomScene extends Phaser.Scene {
 	constructor(){
@@ -10,13 +16,18 @@ export default class RoomScene extends Phaser.Scene {
 
 		this.player = undefined
 		this.cursors = undefined
+		this.appliances = undefined
+		this.toActivate = null
 	}
 
 	preload(){
 		this.load.image('floor', 'assets/floor.png')
-		this.load.image('ground', 'assets/platform.png')
 		this.load.image('wall', 'assets/wall.png')
-
+		this.load.image('playerbounds', 'assets/blankx64.png')
+		this.load.spritesheet(APPLIANCE_KEY,
+			'assets/Appliance.png',
+			{frameWidth: 64, frameHeight: 64}
+		)
 		this.load.spritesheet(DUDE_KEY, 
 			'assets/dude.png',
 			{ frameWidth: 64, frameHeight: 64 }
@@ -24,57 +35,119 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	create(){
+		//this.physics.world.createDebugGraphic()
+		this.cameras.main.setBounds(0,0,800,600)
+		this.cameras.main.setZoom(1.5)
 		this.add.image(400,300, 'floor')
 
 		const walls = this.createWalls()
 		this.player = this.createPlayer()
+		this.appliances = this.createAppliances()
 
 		this.physics.add.collider(this.player, walls)
-
+		this.physics.add.collider(this.player, this.appliances)
+		var activateOverlap = this.physics.add.overlap(this.player.bounds, this.appliances, this.turnOn, null, this)
+		
 		this.cursors = this.input.keyboard.createCursorKeys()
+		e = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
 	}
 
 	update(){
+		this.cameras.main.centerOn(this.player.x, this.player.y)
+		if(Phaser.Input.Keyboard.JustDown(e)){
+			this.appliances.children.iterate((child) =>{
+				if(this.physics.overlap(this.player.bounds, child)){
+					child.activated = !child.activated
+					if(child.activated){
+						child.play('oven')
+					}
+					else{
+						child.anims.remove()
+					}
+				}
+			})
+		}
+
 		if(this.cursors.left.isDown){
 			this.player.setVelocityX(-speed)
 			this.player.anims.play('left',true)
-
 		}
 		else if(this.cursors.right.isDown){
 			this.player.setVelocityX(speed)
 			this.player.anims.play('right',true)
-
 		}
-		else{
+		else {
 			this.player.setVelocityX(0)
 		}
 		if(this.cursors.up.isDown){
 			this.player.setVelocityY(-speed)
 			this.player.anims.play('up',true)
-
 		}
 		else if(this.cursors.down.isDown){
 			this.player.setVelocityY(speed)
 			this.player.anims.play('down',true)
-
 		}
 		else{
 			this.player.setVelocityY(0)
 		}
+
+		if(this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'left'){
+			offsetX = -1
+			offsetY = 0
+		}
+		if(this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'right'){
+			offsetX = 1
+			offsetY = 0
+		}
+		if(this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'up'){
+			offsetX = 0
+			offsetY = -1
+		}
+		if(this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'down'){
+			offsetX = 0
+			offsetY = 1
+		}
+		this.player.bounds.setSize((reach-50)*Math.abs(offsetX) + 50, (reach-50)*Math.abs(offsetY) + 50)
+		this.player.bounds.setX(this.player.x + (reach+64/2-reach/2)*offsetX)
+		this.player.bounds.setY(this.player.y + (reach+64/2-reach/2)*offsetY)
+	}
+
+	createAppliances(){
+		const appliances = this.physics.add.staticGroup({
+			key: APPLIANCE_KEY,
+			repeat: 2,
+			setXY: {x: 128, y:128, stepX: 150}
+		})
+		
+		const ovenSprite = this.anims.create({
+			key: 'oven',
+			frames: this.anims.generateFrameNumbers(APPLIANCE_KEY, {start: 0, end: 4}),
+			frameRate: 5,
+			repeat: -1
+		})
+
+		appliances.children.iterate((child) =>{
+			child.activated = false
+		})		
+		return appliances
 	}
 
 	createWalls(){
-		const walls = this.physics.add.staticGroup()
-		walls.create(600, 400, WALL_KEY).setScale(2).refreshBody()
-		walls.create(600, 400, WALL_KEY)
-		walls.create(50, 250, WALL_KEY)
-		walls.create(750, 220, WALL_KEY)
+		const walls = this.physics.add.staticGroup({
+			key: WALL_KEY,
+			repeat: 2,
+			setXY: {x: 40, y:400, stepX: 64}
+		})
 
 		return walls
 	}
 
 	createPlayer(){
 		const player = this.physics.add.sprite(100,450, DUDE_KEY)
+		player.bounds = this.physics.add.sprite(player.body.x, player.body.y, 'playerbounds')
+		player.bounds.body.setSize(64,50)
+		player.bounds.setVisible(false)
+
 		player.setCollideWorldBounds(true)
 
 		this.anims.create({
