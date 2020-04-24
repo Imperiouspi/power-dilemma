@@ -1,0 +1,799 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"del",
+				"Delete"
+			],
+			[
+				"NumpadEn",
+				"NumpadEnter"
+			],
+			[
+				"def",
+				"def\tFunction"
+			],
+			[
+				"oppor",
+				"opportunity"
+			],
+			[
+				"Screen",
+				"SCREENAREAWIDTH#\t#SCREENAREAWIDTH#"
+			],
+			[
+				"Meas",
+				"Measure"
+			],
+			[
+				"LeftMou",
+				"LeftMouseUpAction"
+			],
+			[
+				"radi",
+				"radialGradient"
+			],
+			[
+				"radai",
+				"radialGradient"
+			],
+			[
+				"mnu",
+				"menuheight"
+			],
+			[
+				"menu",
+				"menuheight"
+			],
+			[
+				"th",
+				"threightwo"
+			],
+			[
+				"render",
+				"render()\tReactDOM"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/main.js",
+			"settings":
+			{
+				"buffer_size": 293,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/scenes/HelloWorldScene.js",
+			"settings":
+			{
+				"buffer_size": 877,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 71.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pci ",
+				"Package Control: Install Package"
+			],
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"ss auto",
+				"Set Syntax: AutoHotkey"
+			],
+			[
+				"ss py",
+				"Set Syntax: Python"
+			],
+			[
+				"ss js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sidebar",
+				"View: Toggle Side Bar"
+			],
+			[
+				"ss pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"powers",
+				"Set Syntax: PowerShell"
+			],
+			[
+				"ss ps",
+				"Set Syntax: PowerShell"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"js babe",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"ss bab",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"ss: babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"ss: scss",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"ss javascript",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ss javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ss j",
+				"Set Syntax: JSX"
+			],
+			[
+				"ss text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"ss bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"ss lua",
+				"Set Syntax: Lua"
+			],
+			[
+				"ss rain",
+				"Set Syntax: Rainmeter"
+			],
+			[
+				"pci \t",
+				"Package Control: Install Package"
+			],
+			[
+				"ss emm",
+				"Set Syntax: Emmet"
+			],
+			[
+				"ss html",
+				"Set Syntax: HTML"
+			],
+			[
+				"ss",
+				"Set Syntax: JSX"
+			],
+			[
+				"ss sass",
+				"Set Syntax: Sass"
+			],
+			[
+				"ss babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"ss  babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"ss jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"ssj",
+				"Set Syntax: JSX"
+			],
+			[
+				"ss ",
+				"Set Syntax: JSX"
+			],
+			[
+				"pc list",
+				"Package Control: List Packages"
+			],
+			[
+				"pc insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ss python",
+				"Set Syntax: Python"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"pc",
+				"Install Package Control"
+			],
+			[
+				"bat",
+				"Set Syntax: Batch File"
+			]
+		],
+		"width": 428.0
+	},
+	"console":
+	{
+		"height": 165.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes"
+	],
+	"file_history":
+	[
+		"/D/Documents/School/Fourth Year/CECA 3/phaser3-parcel-template/src/scenes/HelloWorldScene.js",
+		"/D/Documents/School/Fourth Year/CECA 3/phaser3-parcel-template/src/main.js",
+		"/C/Users/Noah Cassidy/Dropbox/Not Trash Basic Movies.txt",
+		"/C/Users/Noah Cassidy/AppData/Roaming/nvm/settings.txt",
+		"/C/Users/Noah Cassidy/AppData/Roaming/Unreal Engine/AutomationTool/Logs/D+Epic+UE_4.24/UBT-RoomOfRequirement-Win64-Development.txt",
+		"/D/Documents/Code/Autohotkey/Startup/degc.ahk",
+		"/D/Documents/Code/Autohotkey/Startup/micrograms.ahk",
+		"/D/Documents/Code/Autohotkey/Startup/autohotkey_startup.bat",
+		"/D/Documents/tabula-win-1.2.1/tabula/README.txt",
+		"/C/Users/Noah Cassidy/Downloads/Barry Season 1 Mp4 1080p/Read Me.txt",
+		"/C/Users/Noah Cassidy/AppData/Local/Mendeley Ltd/Mendeley Desktop/citationStyles-1.0/CIV576-exam-style.csl",
+		"/C/Users/Noah Cassidy/OneDrive - University of Toronto/Documents/Fourth Year/APS343/Midterm Study.txt",
+		"/C/Users/Noah Cassidy/OneDrive - University of Toronto/Documents/Fourth Year/APS343/Midterm 2 Study.txt",
+		"/D/Documents/Code/NET/Audio Routing Guidebook.txt",
+		"/C/Users/Noah Cassidy/OneDrive - University of Toronto/Documents/Fourth Year/CIV 577/age-heat analysis.py",
+		"/C/Users/Noah Cassidy/Desktop/degc.ahk",
+		"/C/Users/Noah Cassidy/Desktop/F13.ahk",
+		"/C/Users/Noah Cassidy/Desktop/SearchForMessenger.ahk",
+		"/C/Users/Noah Cassidy/Desktop/f13.ahk",
+		"/C/Users/Noah Cassidy/OneDrive - University of Toronto/Documents/Fourth Year/CIV 577/age-heat script.py",
+		"/D/Steam/steamapps/common/Kerbal Space Program/saves/default/quicksave #2.sfs",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/CMakeFiles/CMakeError.log",
+		"/C/Users/Noah Cassidy/Downloads/SideFX Houdini FX 18.0.391 (x64)Crack/Crack Houdini/Readme.txt",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/meshlevelset.h",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/opencl_bindings/clcpp.h",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/openclutils.h",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/c_bindings/openclutils_c.cpp",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/velocityadvector.h",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/src/engine/particlemesher.h",
+		"/D/Documents/Code/flip/Blender-FLIP-Fluids/CMakeLists.txt",
+		"/C/Users/Noah Cassidy/AppData/Roaming/Blender Foundation/Blender/2.81/scripts/addons/flip_fluids_addon/pyfluid/pyfluid.py",
+		"/C/Users/Noah Cassidy/Desktop/RhinoDotNetCrash.txt",
+		"/C/Users/Noah Cassidy/Documents/My Games/Skyrim Special Edition/Skyrim.ini",
+		"/D/Documents/Minecraft/Custom/Mods/1.14/General Mod/src/main/resources/data/generalmod/recipes/sheetmetalblock.json",
+		"/D/Documents/Minecraft/Custom/Mods/1.14/General Mod/src/main/resources/data/generalmod/recipes/brushedaluminumblock.json",
+		"/D/Documents/Games/Minecraft Server/1.15.2/crash-reports/crash-2020-03-22_16.30.03-server.txt",
+		"/D/Documents/Games/Minecraft Server/1.15.2/server.properties",
+		"/D/Documents/Games/Minecraft Server/1.15.2/eula.txt",
+		"/D/Documents/My Games/Skyrim Special Edition/Skyrim.ini",
+		"/D/Documents/Minecraft/Custom/Mods/1.14/General Mod/src/main/resources/META-INF/mods.toml",
+		"/D/Documents/Minecraft/Custom/Mods/1.14/General Mod/build.gradle",
+		"/D/Documents/My Games/Skyrim Special Edition/SkyrimPrefs.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Skyrim_Default.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Skyrim/SkyrimPrefs.ini",
+		"/C/Users/Noah Cassidy/Downloads/Bluebeam Revu eXtreme 2018.4 with Patch/Patch/install notes.txt",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Data/NetScriptFramework/Crash/Crash_2020_3_10_1-54-18.txt",
+		"/C/ProgramData/McAfee/MSC/Logs/{1E1FEB0E-ABA0-4074-B363-BE2ADC6D4CE8}.log",
+		"/C/ProgramData/McAfee/MSC/Logs/{D7FB805D-8827-4A38-8241-340B5D18D9F7}.log",
+		"/C/ProgramData/Intel/Intel Extreme Tuning Utility/Logs/XtuCore.20200227-2354470593.log",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Data/NetScriptFramework/Crash/Crash_2020_3_6_21-52-44.txt",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Data/NetScriptFramework/Crash/Crash_2020_3_3_9-16-43.txt",
+		"/D/Documents/My Games/Skyrim Special Edition/Logs/Script/Papyrus.0.log",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Data/errors.txt",
+		"/C/Users/Noah Cassidy/AppData/Local/Skyrim/plugins.txt",
+		"/D/Vortex/SSEEdit 4_0_3-164-4-0-3-1575326827/README.txt",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/ENBHelperSE.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/skse64.log",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/readme_en.txt",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/PapyrusUtilDev.log",
+		"/D/Documents/My Games/Skyrim Special Edition/Logs/Script/Papyrus.1.log",
+		"/C/Program Files (x86)/Steam/GameOverlayUI.exe.log",
+		"/D/Documents/My Games/Skyrim Special Edition/Logs/Script/Papyrus.2.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/StormLightningPlugin.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/ShaderTools.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/QuickLootSE.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/PapyrusUtilDev.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/Fuz Ro D-oh.log",
+		"/D/Documents/My Games/Skyrim Special Edition/SKSE/BetterJumpingSE.log",
+		"/D/Vortex/DynDOLOD/Edit Scripts/DynDOLOD/DynDOLOD_SSE.ini",
+		"/D/Vortex/LODGen_log.txt",
+		"/D/Vortex/SSEEdit_log.txt",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/Data/Textures/DynDOLOD/lod/dyndolodtreelod.dds",
+		"/D/Vortex/DynDOLOD/Logs/LODGen_SSE_Tamriel_log.txt",
+		"/D/Vortex/DynDOLOD/Logs/DynDOLOD_SSE_log.txt",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries/enbdepthoffield.fx.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enblocal.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries/enbeffect.fx.ini",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries/enbeffect.fx",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries/enbdepthoffield.fx",
+		"/D/Steam/steamapps/common/Skyrim Special Edition/enbseries/enblens.fx.ini",
+		"/C/Users/Noah Cassidy/AppData/Local/Temp/Temp1_enbseries_skyrimse_v0408.zip/WrapperVersion/readme_en.txt",
+		"/D/Vortex/DynDOLOD/Logs/LODGen_SSE_DLC2SolstheimWorld_log.txt",
+		"/D/Vortex/DynDOLOD/Logs/becauseofreasons.txt",
+		"/D/Vortex/DynDOLOD/Edit Scripts/DynDOLOD/DynDOLOD_SSE_worldspace_ignore.txt",
+		"/C/Users/Noah Cassidy/AppData/Local/Temp/Temp1_Wyrmstooth 1.18 SSE.zip/WyrmstoothReadme.txt",
+		"/D/Documents/Games/Minecraft Server/1.12 industrial fantasy/config/itemphysic.cfg",
+		"/C/Users/Noah Cassidy/AppData/Local/Temp/skse64_2_00_17/skse64_readme.txt",
+		"/D/Documents/Curse/Minecraft/Instances/Industrial Fantasy/config/itemphysic.cfg",
+		"/D/Documents/Games/Minecraft Server/1.12 industrial fantasy/eula.txt",
+		"/D/Documents/Games/Minecraft Server/1.12 brop/ops.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/shrubland.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/wetland.json",
+		"/D/Documents/Games/Minecraft Server/1.12 brop/server.properties",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/glacier.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/snowy_tundra.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/seasonal_forest.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biomes/defaults/biomesoplenty/meadow.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/biome_ids.json",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/misc.cfg",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/biomesoplenty/gameplay.cfg",
+		"/D/Documents/Games/Minecraft Server/1.12 brop/options.txt",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/betterwithmods.cfg",
+		"/D/Documents/Games/Minecraft Server/1.12 brop/eula.txt",
+		"/D/Documents/Curse/Minecraft/Instances/Brop 12/config/midnight.cfg",
+		"/C/Users/Noah Cassidy/OneDrive/Documents/Modpack List.txt",
+		"/C/Users/Noah Cassidy/Downloads/Rhinoceros v6.13.19058.00371 (x64) + Crack {B4tman}/Install Notes.txt",
+		"/D/Documents/Curse/Minecraft/Instances/Conquest Reforged Official Modpack/crash-reports/crash-2020-02-06_22.38.31-client.txt",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/overrides.properties",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/server.properties",
+		"/D/Documents/Curse/Minecraft/Instances/HalfStack/options.txt",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/config/traverse-common.toml",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/crash-reports/crash-2020-02-05_22.51.27-server.txt",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/crash-reports/crash-2020-02-05_22.52.32-server.txt",
+		"/D/Documents/Curse/Minecraft/Instances/HalfStack/config/traverse-common.toml",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/eula.txt",
+		"/D/Documents/Curse/Minecraft/Instances/HalfStack/logs/latest.log",
+		"/D/Documents/Curse/Minecraft/Instances/Bropack/crash-reports/crash-2020-02-04_22.55.09-client.txt",
+		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/ordeseq.txt",
+		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/P15.ACC",
+		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/orde_pt.txt",
+		"/C/Users/Noah Cassidy/Downloads/0665-orde street/readme.txt",
+		"/C/Users/Noah Cassidy/AppData/Local/Temp/Temp1_0665-orde street.zip/readme.txt",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/serverstart.bat",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/crash-reports/crash-2020-02-04_10.52.23-server.txt",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/config/waddles-common.toml",
+		"/D/Documents/Games/Minecraft Server/1.14.4 modded/config/biomesoplenty/server.toml",
+		"/D/Documents/Curse/Minecraft/Instances/Bropack/config/traverse-common.toml"
+	],
+	"find":
+	{
+		"height": 42.0
+	},
+	"find_in_files":
+	{
+		"height": 106.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]",
+			"Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n",
+			"maxSave = 0",
+			"Value = 0 Then",
+			" = 0 ",
+			"                            Next O\n                        Next n\n                    Next m\n                Next l\n            Next k\n        Next j\n    Next I",
+			"    For I = 0 To 1\n        For j = 0 To 1\n            For k = 0 To 1\n                For l = 0 To 1\n                    For m = 0 To 1\n                        For n = 0 To 1\n                            For O = 0 To 1",
+			"                            \tIf Range(\"B18\").Value = 0 Then\n                                    I = 0\n                                End If\n                                If Range(\"C18\").Value = 0 Then\n                                    j = 0\n                                End If\n                                If Range(\"D18\").Value = 0 Then\n                                    k = 0\n                                End If\n                                If Range(\"E18\").Value = 0 Then\n                                    l = 0\n                                End If\n                                If Range(\"F18\").Value = 0 Then\n                                    m = 0\n                                End If\n                                If Range(\"G18\").Value = 0 Then\n                                    n = 0\n                                End If\n                                If Range(\"H18\").Value = 0 Then\n                                    O = 0\n                                End If",
+			"I",
+			"I ",
+			"I",
+			"100000000000",
+			"if",
+			"Gardner",
+			"And Range(\"B19\").Value + I <> 1 And Range(\"C19\").Value + j <> 1 And Range(\"D19\").Value + k <> 1 And Range(\"E19\").Value + l <> 1 And Range(\"F19\").Value + m <> 1 And Range(\"G19\").Value + n <> 1 And Range(\"H19\").Value + O <> 1 ",
+			"And Range(\"B18\").Value + I <> 1 And Range(\"C18\").Value + j <> 1 And Range(\"D18\").Value + k <> 1 And Range(\"E18\").Value + l <> 1 And Range(\"F18\").Value + m <> 1 And Range(\"G18\").Value + n <> 1 And Range(\"H18\").Value + O <> 1 Then",
+			"And savings > maxSave And Range(\"B18\").Value + I <> 1 And Range(\"C18\").Value + j <> 1 And Range(\"D18\").Value + k <> 1 And Range(\"E18\").Value + l <> 1 And Range(\"F18\").Value + m <> 1 And Range(\"G18\").Value + n <> 1 And Range(\"H18\").Value + O <> 1 ",
+			"And Range(\"B19\").Value + I <> 1 And Range(\"C19\").Value + j <> 1 And Range(\"D19\").Value + k <> 1 And Range(\"E19\").Value + l <> 1 And Range(\"F19\").Value + m <> 1 And Range(\"G19\").Value + n <> 1 And Range(\"H19\").Value + O <> 1 ",
+			"And Range(\"B18\").Value + I <> 1 And Range(\"C18\").Value + j <> 1 And Range(\"D18\").Value + k <> 1 And Range(\"E18\").Value + l <> 1 And Range(\"F18\").Value + m <> 1 And Range(\"G18\").Value + n <> 1 And Range(\"H18\").Value + O <> 1 ",
+			"And Not Range",
+			"<>",
+			"19",
+			"= 1",
+			"19",
+			"= ",
+			" =",
+			"weight",
+			"19",
+			"And Not",
+			"9",
+			"19",
+			" =",
+			"19",
+			"18",
+			"19",
+			"weight",
+			"==",
+			"If I",
+			"If I + j + k + l + m + n + O = 3",
+			"0",
+			"= ",
+			"  ",
+			"= 0",
+			"And Not Range(\"B19\").",
+			"And (.*) Then",
+			"And .* Then",
+			"If I + j + k + l + m + n + O = 4",
+			"And",
+			"AndRange",
+			" \\* (?:[A-Z]|[a-z]) \\+ ",
+			"citation",
+			": ",
+			".Value * n",
+			".Value * m",
+			"Value * m",
+			"(\\(\"H[0-9][0-9]\"\\).Value = )0",
+			"n + 0",
+			"1000000000000",
+			"<=",
+			" Range(\"B21\").Value = i\n                                    Range(\"C21\").Value = j\n                                    Range(\"D21\").Value = k\n                                    Range(\"E21\").Value = l\n                                    Range(\"F21\").Value = m\n                                    Range(\"G21\").Value = n\n                                    Range(\"H21\").Value = 0",
+			"Sub Knapsac",
+			"Sub",
+			"maxSave",
+			"savings > maxSave",
+			"maxSave = 0",
+			"maxSave = ",
+			"()",
+			"18",
+			"B18",
+			"standard",
+			"weight",
+			"19",
+			"17",
+			"$8",
+			"$Q$",
+			"2:",
+			"17",
+			"Match\\(B([0-9][0-9])",
+			"B22:V36",
+			"Match\\(B([0-9][0-9])",
+			"B2:V16",
+			"B1:V1",
+			"A2:A16",
+			"\\n(\\+|\\-)",
+			"(\\+|\\-)",
+			"\\+",
+			"(\\-|\\+)",
+			"\\n(\\-|\\+)",
+			"(\\-|\\+)",
+			"(-|+)",
+			"Match\\(B([0-9][0-9])",
+			"-",
+			"9:B15",
+			"Match\\(B([0-9][0-9])",
+			"B([0-9][0-9])",
+			"\\n",
+			"=",
+			"\\n",
+			"AG",
+			">",
+			"sizeof",
+			"(DWORD)",
+			"1111",
+			"0000",
+			"0",
+			"1100",
+			"% \\$[0-9]+(,|)[0-9]+.[0-9]+",
+			" - \\n",
+			"[0-9]+ days",
+			"(P|[0-9]\\n(Pt|Pts))\\nX[0-9]+ ",
+			"[os.path",
+			"img1",
+			"y.filename), c",
+			")):\n",
+			"1",
+			"age_path",
+			".length",
+			"Image.open(",
+			"1",
+			",  ",
+			"  ",
+			"    ",
+			", ",
+			"(\\n...)........",
+			"log",
+			"dump",
+			"loaded",
+			"error"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"                            Next loopO\n                        Next loopn\n                    Next loopm\n                Next loopl\n            Next loopk\n        Next loopj\n    Next loopI",
+			"    For loopI = 0 To 1\n        For loopj = 0 To 1\n            For loopk = 0 To 1\n                For loopl = 0 To 1\n                    For loopm = 0 To 1\n                        For loopn = 0 To 1\n                            For loopO = 0 To 1",
+			"=",
+			" =",
+			" ",
+			"And $1 And Not Range(\"B19\").Value = 0 And Not Range(\"C19\").Value= 0 And Not Range(\"D19\").Value= 0 And Not Range(\"E19\").Value = 0 And Not Range(\"F19\").Value= 0 And Not Range(\"G19\").Value= 0 And Not Range(\"H19\").Value = 0 Then",
+			"Range(\"B19\").Value = 0 And Not Range(\"C19\").Value= 0 And Not Range(\"D19\").Value= 0 And Not Range(\"E19\").Value = 0 And Not Range(\"F19\").Value= 0 And Not Range(\"G19\").Value= 0 And Not Range(\"H19\").Value = 0",
+			"= 0 And",
+			"\\t\\t\\t",
+			"$1o",
+			"=",
+			"<",
+			"20",
+			"18",
+			"9:",
+			"9",
+			"19",
+			"Match\\(C$1",
+			"$1",
+			"\\n$1",
+			"\\n&1",
+			"$1",
+			"\\n",
+			"Match\\(C$1",
+			"+",
+			"2:B8",
+			"Match\\(C$1",
+			"C$1",
+			"",
+			"+",
+			"",
+			"\\n",
+			"%",
+			"\\n",
+			"",
+			"\\n",
+			" ",
+			"\\n- ",
+			"$1",
+			"",
+			"33",
+			"Q",
+			"33",
+			"Q",
+			"AD$1",
+			"$1,0)",
+			"Z15",
+			"Z14",
+			"Range(\"Z13\").Value = ",
+			"\\\\\\\\",
+			"\\\\",
+			"\\n•",
+			" ",
+			"\\t",
+			"\\n",
+			"",
+			"Noah Cassidy",
+			"",
+			"some",
+			"50%",
+			"40%",
+			"98vw",
+			"D:/Steam/steamapps/common/Skyrim",
+			"D:\\\\Steam\\\\steamapps\\\\common\\\\Skyrim",
+			"D:\\\\Steam\\\\steamapps\\\\common\\\\Skyrim\\\\",
+			"D:/Steam/steamapps/common/Skyrim/",
+			"D:\\\\Steam\\\\steamapps\\\\common\\\\Skyrim",
+			"D:/Steam/steamapps/common/Skyrim",
+			"coolprint"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/scenes/HelloWorldScene.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 877,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 41.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 402.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "power-dilemma.sublime-project",
+	"replace":
+	{
+		"height": 315.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 180.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
