@@ -6,7 +6,7 @@ export default class FridgeObject extends ApplianceObject {
 		super(x,y,scene)
 		this.key = 'oven'
 		this.animKey = 'oven'
-		this.power = 2
+		this.powerUse = 2
 		this.tint = 0xff00
 	}
 

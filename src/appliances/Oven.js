@@ -6,7 +6,7 @@ export default class OvenObject extends ApplianceObject {
 		super(x, y, scene)
 		this.key = 'oven'
 		this.animKey = 'oven'
-		this.power = 1
+		this.powerUse = 1
 	}
 
 }

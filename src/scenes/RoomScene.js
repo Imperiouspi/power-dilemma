@@ -2,7 +2,12 @@ import Phaser from 'phaser'
 import ApplianceObject from '../appliances/Appliance'
 import OvenObject from '../appliances/Oven'
 import FridgeObject from '../appliances/Fridge'
-import PowerIndicator from '../ui/PowerIndicator'
+
+const width = 1000
+const height = 1000
+const tile_size = 64
+const tile_colour = 0x33ff33
+const tile_alpha = 0.6
 
 const DUDE_KEY = 'dude'
 const WALL_KEY = 'wall'
@@ -16,44 +21,42 @@ var e
 
 export default class RoomScene extends Phaser.Scene {
 	constructor(){
-		super('room-scene')
+		super({key: 'room-scene', active: true})
 
 		this.player = undefined
 		this.cursors = undefined
 		this.appliances = undefined
 		this.toActivate = null
-		this.power = undefined
 	}
 
 	preload(){
-		this.load.image('floor', 'assets/floor.png')
-		this.load.image('wall', 'assets/wall.png')
-		this.load.image('playerbounds', 'assets/blankx64.png')
-		
-		this.load.image('powerbar', 'assets/PowerBar.png')
-		this.load.image('pip', 'assets/PowerPip.png')
+		this.load.image('floor', 'assets/demo/floor.png')
+		this.load.image('wall', 'assets/demo/wall.png')
+		this.load.image('playerbounds', 'assets/demo/blankx64.png')
 
 		this.load.spritesheet(APPLIANCE_KEY,
-			'assets/Appliance.png',
+			'assets/demo/Appliance.png',
 			{frameWidth: 64, frameHeight: 64}
 		)
 		this.load.spritesheet(DUDE_KEY, 
-			'assets/dude.png',
+			'assets/demo/dude.png',
 			{ frameWidth: 64, frameHeight: 64 }
 		)
 	}
 
 	create(){
-		//this.physics.world.createDebugGraphic()
-		this.cameras.main.setBounds(0,0,800,600)
+		this.physics.world.setBounds(0,0,width,height,true,true,true,true)
+		this.physics.world.createDebugGraphic()
+		this.cameras.main.setBounds(0,0,width,height)
 		this.cameras.main.setZoom(1)
 		this.add.image(400,300, 'floor')
+
+		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, tile_size, tile_size, tile_colour, tile_alpha)
+		this.add.existing(this.tileHighlighter)
 
 		const walls = this.initWalls()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
-
-		this.power = this.initPowerIndicator(130, 16, 0)
 
 		this.physics.add.collider(this.player, walls)
 		this.physics.add.collider(this.player, this.appliances)
@@ -64,13 +67,14 @@ export default class RoomScene extends Phaser.Scene {
 
 		this.input.on('pointerdown', function(pointer) {
 			if(pointer.leftButtonDown()){
-				this.addAppliance(pointer.x, pointer.y, 'oven')
+				this.addAppliance(pointer.worldX, pointer.worldY, 'oven')
 			}
 		}, this)
 	}
 
 	update(){
 		this.cameras.main.centerOn(this.player.x, this.player.y)
+		this.highlightTile()
 
 		//keyboard input
 		if(Phaser.Input.Keyboard.JustDown(e)){
@@ -78,12 +82,10 @@ export default class RoomScene extends Phaser.Scene {
 				if(this.physics.overlap(this.player.bounds, child)){
 					child.activated = !child.activated
 					if(child.activated){
-						child.activate()
-						this.power.add(child.power)
+						child.activate(1)
 					}
 					else{
-						child.anims.remove()
-						this.power.add(-child.power)
+						child.activate(-1)
 					}
 				}
 			})
@@ -160,7 +162,7 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	addAppliance(x, y, type){
-		this.appliances.add(new OvenObject(x, y, this), true)
+		this.appliances.add(new OvenObject(this.gridify(x), this.gridify(y), this), true)
 	}
 
 	removeAppliance(x,y, appliance){
@@ -209,13 +211,13 @@ export default class RoomScene extends Phaser.Scene {
 		return player
 	}
 
-	initPowerIndicator(x, y, power){
-		const label = new PowerIndicator(this, x, y, power)
-		this.add.existing(label)
-		for (var i = label.pips.length - 1; i >= 0; i--) {
-			this.add.existing(label.pips[i])
-		};
+	highlightTile(){
+		var pointer = this.input.activePointer
+		this.tileHighlighter.setX(this.gridify(pointer.worldX))
+		this.tileHighlighter.setY(this.gridify(pointer.worldY))
+	}
 
-		return label
+	gridify(coord){
+		return tile_size*Math.round((coord-tile_size/2)/tile_size)+tile_size/2
 	}
 }

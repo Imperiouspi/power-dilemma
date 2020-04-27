@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"Appli",
+				"Appliance"
+			],
+			[
+				"ap",
+				"appliances"
+			],
+			[
+				"ApplianceOb",
+				"ApplianceObject"
+			],
+			[
+				"remove",
+				"removeAppliance"
+			],
+			[
+				"appli",
+				"appliances"
+			],
+			[
+				"for",
+				"for\tfor (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"acti",
+				"activated"
+			],
+			[
+				"activat",
+				"activateOverlap"
+			],
+			[
+				"activ",
+				"activateAppliance"
+			],
+			[
+				"createpl",
+				"createPlayerBubble"
+			],
+			[
+				"applia",
+				"appliances"
+			],
+			[
+				"setVe",
+				"setVelocityX"
+			],
+			[
 				"del",
 				"Delete"
 			],
@@ -59,22 +107,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main.js",
-			"settings":
-			{
-				"buffer_size": 293,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/scenes/HelloWorldScene.js",
-			"settings":
-			{
-				"buffer_size": 877,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -104,11 +136,19 @@
 		"selected_items":
 		[
 			[
-				"pci ",
+				"pci",
 				"Package Control: Install Package"
 			],
 			[
-				"pci",
+				"ss java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ss js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"pci ",
 				"Package Control: Install Package"
 			],
 			[
@@ -118,10 +158,6 @@
 			[
 				"ss py",
 				"Set Syntax: Python"
-			],
-			[
-				"ss js",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"sidebar",
@@ -281,11 +317,20 @@
 	"expanded_folders":
 	[
 		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma",
-		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src",
-		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes"
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src"
 	],
 	"file_history":
 	[
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Fridge.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Oven.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Appliance.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/main.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes/RoomScene.js",
+		"/C/Users/Noah Cassidy/Dropbox/Common Files/Atlassian Backup codes.txt",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/ui/PowerIndicator.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes/BoundingBox.js",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes/BoundingBox",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes/HelloWorldScene.js",
 		"/D/Documents/School/Fourth Year/CECA 3/phaser3-parcel-template/src/scenes/HelloWorldScene.js",
 		"/D/Documents/School/Fourth Year/CECA 3/phaser3-parcel-template/src/main.js",
 		"/C/Users/Noah Cassidy/Dropbox/Not Trash Basic Movies.txt",
@@ -403,17 +448,7 @@
 		"/D/Documents/Curse/Minecraft/Instances/HalfStack/config/traverse-common.toml",
 		"/D/Documents/Games/Minecraft Server/1.14.4 modded/eula.txt",
 		"/D/Documents/Curse/Minecraft/Instances/HalfStack/logs/latest.log",
-		"/D/Documents/Curse/Minecraft/Instances/Bropack/crash-reports/crash-2020-02-04_22.55.09-client.txt",
-		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/ordeseq.txt",
-		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/P15.ACC",
-		"/C/Users/Noah Cassidy/Downloads/0665-orde street/Orde Street Public School/Digital AsBuilt Drawings/2004_0210-1010-024_BAS/orde_pt.txt",
-		"/C/Users/Noah Cassidy/Downloads/0665-orde street/readme.txt",
-		"/C/Users/Noah Cassidy/AppData/Local/Temp/Temp1_0665-orde street.zip/readme.txt",
-		"/D/Documents/Games/Minecraft Server/1.14.4 modded/serverstart.bat",
-		"/D/Documents/Games/Minecraft Server/1.14.4 modded/crash-reports/crash-2020-02-04_10.52.23-server.txt",
-		"/D/Documents/Games/Minecraft Server/1.14.4 modded/config/waddles-common.toml",
-		"/D/Documents/Games/Minecraft Server/1.14.4 modded/config/biomesoplenty/server.toml",
-		"/D/Documents/Curse/Minecraft/Instances/Bropack/config/traverse-common.toml"
+		"/D/Documents/Curse/Minecraft/Instances/Bropack/crash-reports/crash-2020-02-04_22.55.09-client.txt"
 	],
 	"find":
 	{
@@ -431,6 +466,64 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"createPowerIndicator",
+			"createPlayer",
+			"createWalls",
+			"create",
+			"createAppliances",
+			"200",
+			"128",
+			"256",
+			"128",
+			"400",
+			"power",
+			"pips",
+			"updatePowerText",
+			"score",
+			"Oven",
+			"12",
+			"range",
+			"14",
+			"50",
+			"player.anims.isPlaying",
+			"player",
+			"currentAnim",
+			"\t\tif(this.player.anims.currentAnim === 'left'){\n\t\t\t\n\t\t}\n",
+			"this.facing",
+			"range",
+			"player.bounds.body.setSize",
+			"bounding",
+			"this.eKey",
+			"this.",
+			"setX",
+			"setY",
+			"bounds.",
+			"bounds.x",
+			"bounds.",
+			"x",
+			"offset",
+			"this.player.anims",
+			"eKey",
+			"activeE",
+			"body",
+			"this.player.body",
+			"Overlap",
+			"OverlapX",
+			"OverlapX(0)",
+			"player",
+			"\t\t\n",
+			"appliances",
+			"stove",
+			"default",
+			"apps",
+			"appliances",
+			"default",
+			"sky",
+			"160",
+			"left",
+			"GROUND_KEY",
+			"platforms",
+			"this.anims.create({\n\t\t\tkey: 'left',\n\t\t\tframes: [{key: DUDE_KEY, frame: 0}],\n\t\t\tframeRate: 20\n\t\t})",
 			"Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n *Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]",
 			"Range\\(\\\"[A-Z][0-9][0-9]\\\"\\).Value = [a-z]\\n",
 			"maxSave = 0",
@@ -500,65 +593,7 @@
 			"()",
 			"18",
 			"B18",
-			"standard",
-			"weight",
-			"19",
-			"17",
-			"$8",
-			"$Q$",
-			"2:",
-			"17",
-			"Match\\(B([0-9][0-9])",
-			"B22:V36",
-			"Match\\(B([0-9][0-9])",
-			"B2:V16",
-			"B1:V1",
-			"A2:A16",
-			"\\n(\\+|\\-)",
-			"(\\+|\\-)",
-			"\\+",
-			"(\\-|\\+)",
-			"\\n(\\-|\\+)",
-			"(\\-|\\+)",
-			"(-|+)",
-			"Match\\(B([0-9][0-9])",
-			"-",
-			"9:B15",
-			"Match\\(B([0-9][0-9])",
-			"B([0-9][0-9])",
-			"\\n",
-			"=",
-			"\\n",
-			"AG",
-			">",
-			"sizeof",
-			"(DWORD)",
-			"1111",
-			"0000",
-			"0",
-			"1100",
-			"% \\$[0-9]+(,|)[0-9]+.[0-9]+",
-			" - \\n",
-			"[0-9]+ days",
-			"(P|[0-9]\\n(Pt|Pts))\\nX[0-9]+ ",
-			"[os.path",
-			"img1",
-			"y.filename), c",
-			")):\n",
-			"1",
-			"age_path",
-			".length",
-			"Image.open(",
-			"1",
-			",  ",
-			"  ",
-			"    ",
-			", ",
-			"(\\n...)........",
-			"log",
-			"dump",
-			"loaded",
-			"error"
+			"standard"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -645,68 +680,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 293,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/scenes/HelloWorldScene.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 877,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -716,7 +691,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 42.0
 	},
 	"layout":
 	{

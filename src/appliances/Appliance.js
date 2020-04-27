@@ -5,15 +5,20 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 		super(scene, x,y, 'appliance')
 		this.activated = false
 		this.animKey = 'oven'
-		this.power = 1
+		this.powerUse = 1
 		this.setInteractive();
 		this.on('pointerdown', function(pointer){
 			this.scene.removeAppliance(pointer.x, pointer.y, this)
 		}, this)
 	}
 
-	activate(){
-		this.play(this.animKey)
+	activate(onoff){
+		this.scene.registry.values.power += this.powerUse * onoff
+		if(onoff == 1) {
+			this.play(this.animKey)
+		} else if(onoff == -1){
+			this.anims.remove(this.animKey)
+		}
 	}
 
 	play(key){
@@ -21,7 +26,7 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 	}
 
 	destroy(){
-		if(this.activated){this.scene.power.add(-this.power)}
+		if(this.activated){this.scene.registry.values.power -= this.powerUse}
 		super.destroy()
 	}
 
