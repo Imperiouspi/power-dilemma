@@ -107,6 +107,33 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/scenes/RoomScene.js",
+			"settings":
+			{
+				"buffer_size": 5942,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/Util.js",
+			"settings":
+			{
+				"buffer_size": 169,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/main.js",
+			"settings":
+			{
+				"buffer_size": 344,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -317,10 +344,12 @@
 	"expanded_folders":
 	[
 		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma",
-		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src"
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src",
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/scenes"
 	],
 	"file_history":
 	[
+		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/readme.md",
 		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Fridge.js",
 		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Oven.js",
 		"/D/Documents/School/Fourth Year/CECA 3/power-dilemma/src/appliances/Appliance.js",
@@ -447,8 +476,7 @@
 		"/D/Documents/Games/Minecraft Server/1.14.4 modded/crash-reports/crash-2020-02-05_22.52.32-server.txt",
 		"/D/Documents/Curse/Minecraft/Instances/HalfStack/config/traverse-common.toml",
 		"/D/Documents/Games/Minecraft Server/1.14.4 modded/eula.txt",
-		"/D/Documents/Curse/Minecraft/Instances/HalfStack/logs/latest.log",
-		"/D/Documents/Curse/Minecraft/Instances/Bropack/crash-reports/crash-2020-02-04_22.55.09-client.txt"
+		"/D/Documents/Curse/Minecraft/Instances/HalfStack/logs/latest.log"
 	],
 	"find":
 	{
@@ -466,6 +494,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"this",
+			"tile_size",
+			"gridify",
+			"this.gridify",
 			"createPowerIndicator",
 			"createPlayer",
 			"createWalls",
@@ -589,11 +621,7 @@
 			"maxSave",
 			"savings > maxSave",
 			"maxSave = 0",
-			"maxSave = ",
-			"()",
-			"18",
-			"B18",
-			"standard"
+			"maxSave = "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -680,8 +708,95 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/scenes/RoomScene.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5942,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1561,
+								1561
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 880.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Util.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 169,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 344,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								344,
+								344
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],

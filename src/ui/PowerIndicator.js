@@ -2,7 +2,7 @@ import Phase from 'phaser'
 
 export default class PowerIndicator extends Phaser.GameObjects.Image {
 	constructor(scene, x, y, power) {
-		super(scene, x, y, 'powerbar')
+		super(scene, x, y, 'powerbar', {fontSize: '20px', fill: '#000'})
 		this.scene = scene
 		this.x = x
 		this.y = y

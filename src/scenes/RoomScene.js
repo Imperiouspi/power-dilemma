@@ -2,10 +2,10 @@ import Phaser from 'phaser'
 import ApplianceObject from '../appliances/Appliance'
 import OvenObject from '../appliances/Oven'
 import FridgeObject from '../appliances/Fridge'
+import Util from "../Util"
 
-const width = 1000
-const height = 1000
-const tile_size = 64
+const width = 800
+const height = 600
 const tile_colour = 0x33ff33
 const tile_alpha = 0.6
 
@@ -45,23 +45,27 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	create(){
+		//World and Camera
 		this.physics.world.setBounds(0,0,width,height,true,true,true,true)
-		this.physics.world.createDebugGraphic()
+		//this.physics.world.createDebugGraphic()
 		this.cameras.main.setBounds(0,0,width,height)
 		this.cameras.main.setZoom(1)
 		this.add.image(400,300, 'floor')
 
-		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, tile_size, tile_size, tile_colour, tile_alpha)
+		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, Util.tile_size, Util.tile_size, tile_colour, tile_alpha)
 		this.add.existing(this.tileHighlighter)
 
+		//Load first objects
 		const walls = this.initWalls()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
 
+		//Setup Physics
 		this.physics.add.collider(this.player, walls)
 		this.physics.add.collider(this.player, this.appliances)
 		var activateOverlap = this.physics.add.overlap(this.player.bounds, this.appliances, this.turnOn, null, this)
 		
+		//Add input handlers
 		this.cursors = this.input.keyboard.createCursorKeys()
 		e = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
 
@@ -73,6 +77,7 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	update(){
+		//update ui
 		this.cameras.main.centerOn(this.player.x, this.player.y)
 		this.highlightTile()
 
@@ -91,7 +96,7 @@ export default class RoomScene extends Phaser.Scene {
 			})
 		}
 
-		//movement
+		//Player movement: Move player, move bounding box
 		if(this.cursors.left.isDown){
 			this.player.setVelocityX(-speed)
 			this.player.anims.play('left',true)
@@ -139,14 +144,14 @@ export default class RoomScene extends Phaser.Scene {
 	initAppliances(){
 		const appliances = this.physics.add.staticGroup()
 
-		appliances.add(new OvenObject(400,400, this), true)
-		appliances.add(new FridgeObject(400, 164, this), true)
-		appliances.add(new OvenObject(600,200, this), true)
-		appliances.add(new FridgeObject(256, 256, this), true)
-		appliances.add(new OvenObject(100,100, this), true)
-		appliances.add(new FridgeObject(128, 256, this), true)
-		appliances.add(new OvenObject(700,500, this), true)
-		appliances.add(new FridgeObject(100, 532, this), true)
+		appliances.add(new OvenObject(Util.gridify(400),Util.gridify(400), this), true)
+		appliances.add(new FridgeObject(Util.gridify(400),Util.gridify(164), this), true)
+		appliances.add(new OvenObject(Util.gridify(600),Util.gridify(200), this), true)
+		appliances.add(new FridgeObject(Util.gridify(256),Util.gridify(256), this), true)
+		appliances.add(new OvenObject(Util.gridify(100),Util.gridify(100), this), true)
+		appliances.add(new FridgeObject(Util.gridify(128),Util.gridify(256), this), true)
+		appliances.add(new OvenObject(Util.gridify(700),Util.gridify(500), this), true)
+		appliances.add(new FridgeObject(Util.gridify(100),Util.gridify(532), this), true)
 
 		const ovenSprite = this.anims.create({
 			key: 'oven',
@@ -162,7 +167,7 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	addAppliance(x, y, type){
-		this.appliances.add(new OvenObject(this.gridify(x), this.gridify(y), this), true)
+		this.appliances.add(new OvenObject(Util.gridify(x), Util.gridify(y), this), true)
 	}
 
 	removeAppliance(x,y, appliance){
@@ -180,7 +185,7 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	initPlayer(){
-		const player = this.physics.add.sprite(100,450, DUDE_KEY)
+		const player = this.physics.add.sprite(Util.gridify(100),Util.gridify(450), DUDE_KEY)
 		player.bounds = this.physics.add.sprite(player.body.x, player.body.y, 'playerbounds')
 		player.bounds.body.setSize(64,50)
 		player.bounds.setVisible(false)
@@ -213,11 +218,7 @@ export default class RoomScene extends Phaser.Scene {
 
 	highlightTile(){
 		var pointer = this.input.activePointer
-		this.tileHighlighter.setX(this.gridify(pointer.worldX))
-		this.tileHighlighter.setY(this.gridify(pointer.worldY))
-	}
-
-	gridify(coord){
-		return tile_size*Math.round((coord-tile_size/2)/tile_size)+tile_size/2
+		this.tileHighlighter.setX(Util.gridify(pointer.worldX))
+		this.tileHighlighter.setY(Util.gridify(pointer.worldY))
 	}
 }
