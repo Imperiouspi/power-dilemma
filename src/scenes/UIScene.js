@@ -1,9 +1,11 @@
 import Phaser from 'phaser'
 import PowerIndicator from '../ui/PowerIndicator'
 import MoneyBar from '../ui/MoneyBar'
-
-const startingBalance = 1000
+import LoseScene from '../scenes/LoseScene'
+import Util from '../Util'
+const startingBalance = 1
 const powerCost = 1
+var biller
 
 export default class UIScene extends Phaser.Scene
 {
@@ -17,8 +19,8 @@ export default class UIScene extends Phaser.Scene
 
 	preload()
 	{
-		this.load.image('powerbar', 'assets/demo/PowerBar.png')
-		this.load.image('pip', 'assets/demo/PowerPip.png')
+		this.load.image('powerbar', 'assets/demo/powerbar.png')
+		this.load.image('power-pip', 'assets/demo/power-pip.png')
 	}
 
 	create()
@@ -27,7 +29,7 @@ export default class UIScene extends Phaser.Scene
 		this.powerIndicator = this.initPowerIndicator(130, 16, 0)
 
 		this.registry.events.on('changedata-power', function(){
-			this.powerIndicator.updatePowerPips()
+			this.powerIndicator.updateBar()
 		}, this)
 
 		//Money
@@ -38,14 +40,20 @@ export default class UIScene extends Phaser.Scene
 
 		this.billTimer = this.add.graphics()
 		this.bill = 0
-		setInterval((function(self){
+		biller = setInterval((function(self){
 			return function(){
 				self.stepBill()
 			}
-		})(this),1000)
+		})(this),300)
 
 		this.registry.events.on('changedata-balance', function(){
-			this.moneyBar.updateBalance()
+			if(this.registry.values.balance <= 0){this.moneyBar.emit('broke', this)}
+			else{this.moneyBar.updateBalance()}
+		}, this)
+
+		this.moneyBar.on('broke', function(scene){
+			clearInterval(biller)
+			Util.lose('broke', scene)
 		}, this)
 	}
 

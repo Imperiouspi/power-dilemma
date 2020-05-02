@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 import RoomScene from './scenes/RoomScene'
 import UIScene from './scenes/UIScene'
+import LoseScene from './scenes/LoseScene'
 
 const config = {
 	type: Phaser.AUTO,
@@ -14,7 +15,7 @@ const config = {
 			gravity: { y: 0 }
 		}
 	},
-	scene: [RoomScene, UIScene]
+	scene: [RoomScene, UIScene, LoseScene]
 }
 
 export default new Phaser.Game(config)

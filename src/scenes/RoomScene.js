@@ -162,7 +162,7 @@ export default class RoomScene extends Phaser.Scene {
 
 		appliances.children.iterate((child) =>{
 			child.activated = false
-		})		
+		})
 		return appliances
 	}
 
@@ -220,5 +220,11 @@ export default class RoomScene extends Phaser.Scene {
 		var pointer = this.input.activePointer
 		this.tileHighlighter.setX(Util.gridify(pointer.worldX))
 		this.tileHighlighter.setY(Util.gridify(pointer.worldY))
+	}
+
+	destroy(){
+		appliances.children.iterate((child) =>{
+			this.appliances.remove(child, true, true)
+		})
 	}
 }

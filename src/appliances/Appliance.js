@@ -29,9 +29,14 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 	}
 
 	destroy(){
-		if(this.activated){this.scene.registry.values.power -= this.powerUse}
-		this.scene.registry.values.balance += this.cost
-		super.destroy()
+		try{
+			if(this.activated){this.scene.registry.values.power -= this.powerUse}
+			this.scene.registry.values.balance += this.cost
+			super.destroy()
+		}
+		catch(err){
+
+		}
 	}
 
 }
