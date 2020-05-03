@@ -1,0 +1,15 @@
+Select Button -> UI
+Popup Dialog -> UI
+Select Object -> UI
+	set place mode
+	Close dialog
+	Emit place event
+Phantom object -> Room
+	read place event
+		add place phantom
+	draw place phantom
+Place Object -> Room
+	Listen for click
+	Add appliance
+	change mode
+	remove phantom

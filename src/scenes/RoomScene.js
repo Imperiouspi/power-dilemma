@@ -33,7 +33,6 @@ export default class RoomScene extends Phaser.Scene {
 		this.load.image('floor', 'assets/demo/floor.png')
 		this.load.image('wall', 'assets/demo/wall.png')
 		this.load.image('playerbounds', 'assets/demo/blankx64.png')
-
 		this.load.spritesheet(APPLIANCE_KEY,
 			'assets/demo/Appliance.png',
 			{frameWidth: 64, frameHeight: 64}
@@ -52,6 +51,7 @@ export default class RoomScene extends Phaser.Scene {
 		this.cameras.main.setZoom(1)
 		this.add.image(400,300, 'floor')
 
+		this.registry.set('mode', 'normal')
 		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, Util.tile_size, Util.tile_size, tile_colour, tile_alpha)
 		this.add.existing(this.tileHighlighter)
 
@@ -59,8 +59,8 @@ export default class RoomScene extends Phaser.Scene {
 		const walls = this.initWalls()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
-		this.storage = new StorageInterface(this)
-
+		
+		
 		//Setup Physics
 		this.physics.add.collider(this.player, walls)
 		this.physics.add.collider(this.player, this.appliances)
@@ -71,16 +71,32 @@ export default class RoomScene extends Phaser.Scene {
 		e = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
 
 		this.input.on('pointerdown', function(pointer) {
-			if(pointer.leftButtonDown()){
-				this.chooseObject(pointer.worldX, pointer.worldY)
+			if(pointer.leftButtonDown() && this.registry.values.mode == 'place'){
+				this.addAppliance(this.phantom.key, Util.gridify(pointer.worldX), Util.gridify(pointer.worldY), )
+				this.registry.values.mode = 'normal'
+				this.tileHighlighter.setVisible(true)
+				this.phantom.destroy()
 			}
+		}, this)
+
+		this.scene.get('ui-scene').events.on('placeevent', function(key){
+			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
+			this.phantom = this.add.image(0,0,key)
+			this.phantom.alpha = 0.6
+			this.tileHighlighter.setVisible(false)
 		}, this)
 	}
 
 	update(){
 		//update ui
 		this.cameras.main.centerOn(this.player.x, this.player.y)
-		this.highlightTile()
+
+		//mode change
+		if(this.registry.values.mode == 'place'){
+			this.drawPhantomAtCursor()	
+		} else{
+			this.highlightTile()
+		}
 
 		//keyboard input
 		if(Phaser.Input.Keyboard.JustDown(e)){
@@ -167,11 +183,8 @@ export default class RoomScene extends Phaser.Scene {
 		return appliances
 	}
 
-	chooseObject(x, y){
-		this.storage.x = x
-		this.storage.y = y
-		this.storage.setVisible()
-		//this.appliances.add(new OvenObject(Util.gridify(x), Util.gridify(y), this), true)
+	addAppliance(key, x,y){
+		this.appliances.add(new OvenObject(x, y, this), true)
 	}
 
 	removeAppliance(x,y, appliance){
@@ -184,7 +197,7 @@ export default class RoomScene extends Phaser.Scene {
 			repeat: 2,
 			setXY: {x: 40, y:400, stepX: 64}
 		})
-
+		walls.setDepth(1)
 		return walls
 	}
 
@@ -224,6 +237,12 @@ export default class RoomScene extends Phaser.Scene {
 		var pointer = this.input.activePointer
 		this.tileHighlighter.setX(Util.gridify(pointer.worldX))
 		this.tileHighlighter.setY(Util.gridify(pointer.worldY))
+	}
+
+	drawPhantomAtCursor(){
+		var pointer = this.input.activePointer
+		this.phantom.setX(Util.gridify(pointer.worldX))
+		this.phantom.setY(Util.gridify(pointer.worldY))
 	}
 
 	destroy(){
