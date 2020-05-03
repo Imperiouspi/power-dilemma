@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
-import ApplianceObject from '../appliances/Appliance'
-import OvenObject from '../appliances/Oven'
-import FridgeObject from '../appliances/Fridge'
+import ApplianceObject from '../placeables/appliances/Appliance'
+import OvenObject from '../placeables/appliances/Oven'
+import FridgeObject from '../placeables/appliances/Fridge'
 import Util from "../Util"
 
 const width = 800
@@ -59,6 +59,7 @@ export default class RoomScene extends Phaser.Scene {
 		const walls = this.initWalls()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
+		this.storage = new StorageInterface(this)
 
 		//Setup Physics
 		this.physics.add.collider(this.player, walls)
@@ -71,7 +72,7 @@ export default class RoomScene extends Phaser.Scene {
 
 		this.input.on('pointerdown', function(pointer) {
 			if(pointer.leftButtonDown()){
-				this.addAppliance(pointer.worldX, pointer.worldY, 'oven')
+				this.chooseObject(pointer.worldX, pointer.worldY)
 			}
 		}, this)
 	}
@@ -166,8 +167,11 @@ export default class RoomScene extends Phaser.Scene {
 		return appliances
 	}
 
-	addAppliance(x, y, type){
-		this.appliances.add(new OvenObject(Util.gridify(x), Util.gridify(y), this), true)
+	chooseObject(x, y){
+		this.storage.x = x
+		this.storage.y = y
+		this.storage.setVisible()
+		//this.appliances.add(new OvenObject(Util.gridify(x), Util.gridify(y), this), true)
 	}
 
 	removeAppliance(x,y, appliance){
@@ -226,5 +230,9 @@ export default class RoomScene extends Phaser.Scene {
 		appliances.children.iterate((child) =>{
 			this.appliances.remove(child, true, true)
 		})
+	}
+
+	drawStorage(x,y){
+
 	}
 }

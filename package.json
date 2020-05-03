@@ -21,6 +21,7 @@
 	},
 	"dependencies": {
 		"phaser": "^3.22.0",
+		"phaser-ui-tools": "^2.0.0-beta",
 		"ui": "^0.2.4"
 	},
 	"parcelCleanPaths": [
