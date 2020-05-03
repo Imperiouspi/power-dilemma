@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 import RoomScene from './scenes/RoomScene'
 import UIScene from './scenes/UIScene'
 import LoseScene from './scenes/LoseScene'
+import PlaceScene from './scenes/PlaceScene'
 
 const config = {
 	type: Phaser.AUTO,

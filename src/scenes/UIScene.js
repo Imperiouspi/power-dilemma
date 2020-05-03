@@ -3,7 +3,7 @@ import PowerIndicator from '../ui/PowerIndicator'
 import MoneyBar from '../ui/MoneyBar'
 import LoseScene from '../scenes/LoseScene'
 import Util from '../Util'
-const startingBalance = 1
+const startingBalance = 1000
 const powerCost = 1
 var biller
 
@@ -44,7 +44,7 @@ export default class UIScene extends Phaser.Scene
 			return function(){
 				self.stepBill()
 			}
-		})(this),300)
+		})(this),1000)
 
 		this.registry.events.on('changedata-balance', function(){
 			if(this.registry.values.balance <= 0){this.moneyBar.emit('broke', this)}
@@ -52,8 +52,8 @@ export default class UIScene extends Phaser.Scene
 		}, this)
 
 		this.moneyBar.on('broke', function(scene){
-			clearInterval(biller)
-			Util.lose('broke', scene)
+			//clearInterval(biller)
+			//Util.lose('broke', scene) //Uncomment for lose
 		}, this)
 	}
 
