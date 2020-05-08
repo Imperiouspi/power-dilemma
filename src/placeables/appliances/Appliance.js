@@ -1,8 +1,9 @@
 import Phaser from 'phaser'
 
 export default class ApplianceObject extends Phaser.GameObjects.Sprite {
-	constructor(x,y,scene){
-		super(scene, x,y, 'appliance')
+	constructor(x,y,scene, key){
+		super(scene, x,y, key)
+		this.key = key
 		this.type = 'appliance'
 		this.activated = false
 		this.animKey = 'oven'

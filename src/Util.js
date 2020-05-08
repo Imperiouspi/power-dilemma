@@ -12,3 +12,12 @@ export default class Util{
 }
 
 Util.tile_size = 64
+Util.ApplianceKeys = [
+	'computer',
+	'fridge',
+	'lamp',
+	'microwave',
+	'oven',
+	'toaster',
+	'tv'
+]

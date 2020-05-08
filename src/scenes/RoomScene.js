@@ -1,7 +1,12 @@
 import Phaser from 'phaser'
 import ApplianceObject from '../placeables/appliances/Appliance'
-import OvenObject from '../placeables/appliances/Oven'
+import ComputerObject from '../placeables/appliances/Computer'
 import FridgeObject from '../placeables/appliances/Fridge'
+import LampObject from '../placeables/appliances/Lamp'
+import MicrowaveObject from '../placeables/appliances/Microwave'
+import OvenObject from '../placeables/appliances/Oven'
+import ToasterObject from '../placeables/appliances/Toaster'
+import TVObject from '../placeables/appliances/TV'
 import Util from "../Util"
 
 const width = 800
@@ -9,9 +14,8 @@ const height = 600
 const tile_colour = 0x33ff33
 const tile_alpha = 0.6
 
-const DUDE_KEY = 'dude'
+const DUDE_KEY = 'character-boy'
 const WALL_KEY = 'wall'
-const APPLIANCE_KEY = 'appliance'
 
 const speed = 300
 const reach = 20
@@ -33,12 +37,16 @@ export default class RoomScene extends Phaser.Scene {
 		this.load.image('floor', 'assets/demo/floor.png')
 		this.load.image('wall', 'assets/demo/wall.png')
 		this.load.image('playerbounds', 'assets/demo/blankx64.png')
-		this.load.spritesheet(APPLIANCE_KEY,
-			'assets/demo/Appliance.png',
-			{frameWidth: 64, frameHeight: 64}
-		)
+
+		for (var i = Util.ApplianceKeys.length - 1; i >= 0; i--) {
+			this.load.spritesheet(Util.ApplianceKeys[i],
+				`assets/${Util.ApplianceKeys[i]}.jpg`,
+				{frameWidth: 64, frameHeight: 64}
+			)
+		}
+
 		this.load.spritesheet(DUDE_KEY, 
-			'assets/demo/dude.png',
+			`assets/${DUDE_KEY}.png`,
 			{ frameWidth: 64, frameHeight: 64 }
 		)
 	}
@@ -54,6 +62,8 @@ export default class RoomScene extends Phaser.Scene {
 		this.registry.set('mode', 'normal')
 		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, Util.tile_size, Util.tile_size, tile_colour, tile_alpha)
 		this.add.existing(this.tileHighlighter)
+
+		this.createAnimations()
 
 		//Load first objects
 		const walls = this.initWalls()
@@ -72,7 +82,7 @@ export default class RoomScene extends Phaser.Scene {
 
 		this.input.on('pointerdown', function(pointer) {
 			if(pointer.leftButtonDown() && this.registry.values.mode == 'place'){
-				this.addAppliance(this.phantom.key, Util.gridify(pointer.worldX), Util.gridify(pointer.worldY), )
+				this.addAppliance(this.phantom.texture.key, Util.gridify(pointer.worldX), Util.gridify(pointer.worldY))
 				this.registry.values.mode = 'normal'
 				this.tileHighlighter.setVisible(true)
 				this.phantom.destroy()
@@ -158,24 +168,53 @@ export default class RoomScene extends Phaser.Scene {
 		this.player.bounds.setY(this.player.y + (reach+64/2-reach/2)*offsetY)
 	}
 
-	initAppliances(){
-		const appliances = this.physics.add.staticGroup()
-
-		appliances.add(new OvenObject(Util.gridify(400),Util.gridify(400), this), true)
-		appliances.add(new FridgeObject(Util.gridify(400),Util.gridify(164), this), true)
-		appliances.add(new OvenObject(Util.gridify(600),Util.gridify(200), this), true)
-		appliances.add(new FridgeObject(Util.gridify(256),Util.gridify(256), this), true)
-		appliances.add(new OvenObject(Util.gridify(100),Util.gridify(100), this), true)
-		appliances.add(new FridgeObject(Util.gridify(128),Util.gridify(256), this), true)
-		appliances.add(new OvenObject(Util.gridify(700),Util.gridify(500), this), true)
-		appliances.add(new FridgeObject(Util.gridify(100),Util.gridify(532), this), true)
-
-		const ovenSprite = this.anims.create({
-			key: 'oven',
-			frames: this.anims.generateFrameNumbers(APPLIANCE_KEY, {start: 0, end: 4}),
-			frameRate: 5,
+	createAnimations(){
+		const computerSprite = this.anims.create({
+			key: 'computer',
+			frames: this.anims.generateFrameNumbers('computer', {start: 1, end: 1}),
+			frameRate: 1,
 			repeat: -1
 		})
+		const fridgeSprite = this.anims.create({
+			key: 'fridge',
+			frames: this.anims.generateFrameNumbers('fridge', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+		const lampSprite = this.anims.create({
+			key: 'lamp',
+			frames: this.anims.generateFrameNumbers('lamp', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+		const microwaveSprite = this.anims.create({
+			key: 'microwave',
+			frames: this.anims.generateFrameNumbers('microwave', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+		const ovenSprite = this.anims.create({
+			key: 'oven',
+			frames: this.anims.generateFrameNumbers('oven', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+		const toasterSprite = this.anims.create({
+			key: 'toaster',
+			frames: this.anims.generateFrameNumbers('toaster', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+		const tvSprite = this.anims.create({
+			key: 'tv',
+			frames: this.anims.generateFrameNumbers('tv', {start: 1, end: 1}),
+			frameRate: 1,
+			repeat: -1
+		})
+	}
+
+	initAppliances(){
+		const appliances = this.physics.add.staticGroup()
 
 		appliances.children.iterate((child) =>{
 			child.activated = false
@@ -184,7 +223,27 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	addAppliance(key, x,y){
-		this.appliances.add(new OvenObject(x, y, this), true)
+		if(key == 'computer'){
+			this.appliances.add(new ComputerObject(x, y, this), true)
+		}
+		else if(key == 'fridge'){
+			this.appliances.add(new FridgeObject(x, y, this), true)
+		}
+		else if(key == 'lamp'){
+			this.appliances.add(new LampObject(x, y, this), true)
+		}
+		else if(key == 'microwave'){
+			this.appliances.add(new MicrowaveObject(x, y, this), true)
+		}
+		else if(key == 'oven'){
+			this.appliances.add(new OvenObject(x, y, this), true)
+		}
+		else if(key == 'toaster'){
+			this.appliances.add(new ToasterObject(x, y, this), true)
+		}
+		else if(key == 'tv'){
+			this.appliances.add(new TVObject(x, y, this), true)
+		}
 	}
 
 	removeAppliance(x,y, appliance){
@@ -192,19 +251,19 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	initWalls(){
-		const walls = this.physics.add.staticGroup({
-			key: WALL_KEY,
-			repeat: 2,
-			setXY: {x: 40, y:400, stepX: 64}
-		})
-		walls.setDepth(1)
+		const walls = this.physics.add.staticGroup()//{
+		// 	key: WALL_KEY,
+		// 	repeat: 2,
+		// 	setXY: {x: 40, y:400, stepX: 64}
+		// })
+		// walls.setDepth(1)
 		return walls
 	}
 
 	initPlayer(){
 		const player = this.physics.add.sprite(Util.gridify(100),Util.gridify(450), DUDE_KEY)
 		player.bounds = this.physics.add.sprite(player.body.x, player.body.y, 'playerbounds')
-		player.bounds.body.setSize(64,50)
+		player.bounds.body.setSize(Util.tile_size,50)
 		player.bounds.setVisible(false)
 
 		player.setCollideWorldBounds(true)

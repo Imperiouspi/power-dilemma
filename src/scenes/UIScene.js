@@ -114,57 +114,16 @@ export default class UIScene extends Phaser.Scene
 		this.storage = new Viewport(this, this.storageButton.x-50, this.storageButton.y - 300, 64, 260)
 		var column = new Column(this)
 		this.storage.addNode(column)
-
-		var store_ob_1 = this.add.image(0,0, 'wall')
-		var store_ob_2 = this.add.image(0,0, 'appliance')
-		var store_ob_3 = this.add.image(0,0, 'appliance')
-		var store_ob_4 = this.add.image(0,0, 'appliance')
-		var store_ob_5 = this.add.image(0,0, 'appliance')
-		var store_ob_6 = this.add.image(0,0, 'appliance')
-
-		store_ob_1.setInteractive()
-		store_ob_2.setInteractive()
-		store_ob_2.tint = 0xff00
-		store_ob_3.setInteractive()
-		store_ob_3.tint = 0xf0f0f0
-		store_ob_4.setInteractive()
-		store_ob_4.tint = 0x0fff00
-		store_ob_5.setInteractive()
-		store_ob_5.tint = 0x0000ff
-		store_ob_6.setInteractive()
-		store_ob_6.tint = 0xdddddd
-
-		store_ob_1.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-		store_ob_2.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-		store_ob_3.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-		store_ob_4.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-		store_ob_5.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-		store_ob_6.on('pointerdown', function(){
-			this.events.emit('placeevent', 'appliance')
-			this.registry.values.mode = 'place'
-		}, this)
-
-		column.addNode(store_ob_1)
-		column.addNode(store_ob_2)
-		column.addNode(store_ob_3)
-		column.addNode(store_ob_4)
-		column.addNode(store_ob_5)
-		column.addNode(store_ob_6)
+		for (var i = Util.ApplianceKeys.length - 1; i >= 0; i--) {
+			var ob = this.add.image(0,0, Util.ApplianceKeys[i])
+			ob.setInteractive()
+			var scene = this
+			ob.on('pointerdown', function(){
+				scene.events.emit('placeevent', this.texture.key)
+				scene.registry.values.mode = 'place'
+			}, ob)
+			column.addNode(ob)
+		}
 
 		this.storageScroll = new Scrollbar(this, this.storage, true, true, "track", "bar", {'duration': 300, 'ease': Phaser.Math.Easing.Quadratic.Out})
 		Phaser.Display.Align.To.RightCenter(this.storageScroll, this.storage, 64 + 2, 0)
