@@ -6,8 +6,9 @@ import Util from '../Util'
 import {Viewport} from 'phaser-ui-tools'
 import {Column} from 'phaser-ui-tools'
 import {Scrollbar} from 'phaser-ui-tools'
+import Button from '../ui/Button'
 
-const startingBalance = 1000
+const startingBalance = 999.00
 const powerCost = 1
 var biller
 
@@ -19,13 +20,26 @@ export default class UIScene extends Phaser.Scene
 		this.powerIndicator = undefined
 		this.moneyCount = undefined
 		this.accumulatedBill = 0
-		this.storeon = false
 	}
 
 	preload()
 	{
-		this.load.image('powerbar', 'assets/demo/powerbar.png')
-		this.load.image('power-pip', 'assets/demo/power-pip.png')
+		this.load.image('mainscreen', 'assets/Main Screen1.png')
+		this.load.image('mainscreen_icons', 'assets/Main Screen2.png')
+		
+		//load shop assets
+		this.load.spritesheet('shop', 'assets/icon-shop.png',
+			{ frameWidth: 64, frameHeight: 64 })
+
+		this.load.spritesheet('gen', 'assets/demo/icon-gen.png',
+			{ frameWidth: 64, frameHeight: 64 })
+		this.load.spritesheet('storage', 'assets/icon-storage.png',
+			{ frameWidth: 64, frameHeight: 64 })
+		this.load.spritesheet('profile', 'assets/icon-profile.png',
+			{ frameWidth: 64, frameHeight: 64 })
+		this.load.spritesheet('settings', 'assets/icon-settings.png',
+			{ frameWidth: 64, frameHeight: 64 })
+
 		this.load.image('track', 'assets/demo/track.png')
 		this.load.image('crate', 'assets/demo/crate.png')
 		this.load.spritesheet('bar', 
@@ -35,27 +49,58 @@ export default class UIScene extends Phaser.Scene
 
 	create()
 	{
+		this.uiplacer = this.add.text(400,300, `${this.input.activePointer.x}, ${this.input.activePointer.y}`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif' })
+		
+		//Main UI
+		this.add.image(400, 300, 'mainscreen')
+		this.add.image(400, 300, 'mainscreen_icons').setDepth(1)
+
+		//buttons
+		var shopButton = new Button(this, 75, 530, 'shop', function(){
+			console.log('open shop')
+		})
+		this.add.existing(shopButton)
+
+		var genButton = new Button(this, 175, 530, 'gen', function(){
+			console.log('open gen')
+		})
+		this.add.existing(genButton)
+
+		var profileButton = new Button(this, 645, 515, 'profile', function(){
+			console.log('open profile')
+		})
+		this.add.existing(profileButton)
+		var settingsButton = new Button(this, 715, 515, 'settings', function(){
+			console.log('open settings')
+		})
+		this.add.existing(settingsButton)
+
 		//storage
-		this.storageButton = this.add.image(800-100, 600-100, 'crate')
-		this.storageButton.setInteractive()
 		this.initstorage()
-		this.storageButton.on('pointerdown', function(pointer){
+		var storageButton = new Button(this, 575, 515, 'storage', function(){
 			this.storeon = !this.storeon
-			this.storage.setVisible(this.storeon)
-			this.storage.active = this.storeon
-			this.storageScroll.setVisible(this.storeon)
-			this.storageScroll.active = this.storeon
+			this.scene.storage.setVisible(this.storeon)
+			this.scene.storage.active = this.storeon
+			this.scene.storageScroll.setVisible(this.storeon)
+			this.scene.storageScroll.active = this.storeon
 		}, this)
+		this.add.existing(storageButton)
+		storageButton.storeon = false
 
 		//Power
-		this.powerIndicator = this.initPowerIndicator(130, 16, 0)
+		this.powerIndicator = this.initPowerIndicator(304, 39, 0, 10)
 
 		this.registry.events.on('changedata-power', function(){
-			this.powerIndicator.updateBar()
+			this.powerIndicator.updatePower()
+		}, this)
+
+		this.registry.events.on('changedata-generated', function(){
+			this.powerIndicator.updatePower()
 		}, this)
 
 		//Money
 		this.moneyBar = this.initBalance(startingBalance)
+		this.moneyBar.updateBalance()
 		this.billBar = this.add.graphics()
 		this.billBar.fillStyle(0x222222, 0.8)
 		this.billBar.fillRect(25,55,10,103)
@@ -77,20 +122,17 @@ export default class UIScene extends Phaser.Scene
 			//clearInterval(biller)
 			//Util.lose('broke', scene) //Uncomment for lose
 		}, this)
+
 	}
 
-	initPowerIndicator(x, y, power){
-		const indic = new PowerIndicator(this, x, y, power)
+	initPowerIndicator(x, y, power, gen){
+		const indic = new PowerIndicator(this, x, y, power, gen)
 		this.add.existing(indic)
-		for (var i = indic.pips.length - 1; i >= 0; i--) {
-			this.add.existing(indic.pips[i])
-		};
-
 		return indic
 	}
 
 	initBalance(amount){
-		var moneyBar = new MoneyBar(this, 20, 30, startingBalance)
+		var moneyBar = new MoneyBar(this, 105, 39, startingBalance)
 		this.add.existing(moneyBar)
 		return moneyBar
 	}
@@ -111,9 +153,17 @@ export default class UIScene extends Phaser.Scene
 	}
 
 	initstorage(){
-		this.storage = new Viewport(this, this.storageButton.x-50, this.storageButton.y - 300, 64, 260)
+		this.storage = new Viewport(this, 600-50, 525 - 300, 64, 260)
 		var column = new Column(this)
 		this.storage.addNode(column)
+		var wall = this.add.image(0,0, 'woodwall-segment')
+		wall.setInteractive()
+		var scene = this
+		wall.on('pointerdown', function(){
+			scene.events.emit('placewallevent', 'woodwall')
+			scene.registry.values.mode = 'placewall'
+		}, wall)
+		column.addNode(wall)
 		for (var i = Util.ApplianceKeys.length - 1; i >= 0; i--) {
 			var ob = this.add.image(0,0, Util.ApplianceKeys[i])
 			ob.setInteractive()
@@ -132,5 +182,9 @@ export default class UIScene extends Phaser.Scene
 		this.storage.active = false
 		this.storageScroll.setVisible(false)
 		this.storageScroll.active = false
+	}
+
+	update(){
+		this.uiplacer.text = `${this.input.activePointer.x}, ${this.input.activePointer.y}`
 	}
 }

@@ -20,9 +20,11 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 	activate(onoff){
 		this.scene.registry.values.power += this.powerUse * onoff
 		if(onoff == 1) {
-			this.play(this.animKey)
+			this.activated = true
+			this.setFrame(1)
 		} else if(onoff == -1){
-			this.anims.remove(this.animKey)
+			this.activated = false
+			this.setFrame(0)
 		}
 	}
 

@@ -34,16 +34,18 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	preload(){
-		this.load.image('floor', 'assets/demo/floor.png')
-		this.load.image('wall', 'assets/demo/wall.png')
+		this.load.image('floor', 'assets/Map Floor.png')
+		this.load.image('walls', 'assets/Map Walls.png')
 		this.load.image('playerbounds', 'assets/demo/blankx64.png')
 
 		for (var i = Util.ApplianceKeys.length - 1; i >= 0; i--) {
 			this.load.spritesheet(Util.ApplianceKeys[i],
-				`assets/${Util.ApplianceKeys[i]}.jpg`,
+				`assets/${Util.ApplianceKeys[i]}.png`,
 				{frameWidth: 64, frameHeight: 64}
 			)
 		}
+		this.load.image('woodwall-segment', 'assets/demo/wall-segment.png')
+		this.load.image('woodwall', 'assets/demo/wall-end.png')
 
 		this.load.spritesheet(DUDE_KEY, 
 			`assets/${DUDE_KEY}.png`,
@@ -57,7 +59,8 @@ export default class RoomScene extends Phaser.Scene {
 		//this.physics.world.createDebugGraphic()
 		this.cameras.main.setBounds(0,0,width,height)
 		this.cameras.main.setZoom(1)
-		this.add.image(400,300, 'floor')
+		this.add.image(width/2,height/2, 'floor')
+		//this.add.image(width/2,height/2, 'walls')
 
 		this.registry.set('mode', 'normal')
 		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, Util.tile_size, Util.tile_size, tile_colour, tile_alpha)
@@ -66,13 +69,15 @@ export default class RoomScene extends Phaser.Scene {
 		this.createAnimations()
 
 		//Load first objects
-		const walls = this.initWalls()
+		this.walls = this.initWalls()
+		this.wallEnds = this.initWallEnds()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
 		
 		
 		//Setup Physics
-		this.physics.add.collider(this.player, walls)
+		this.physics.add.collider(this.player, this.walls)
+		this.physics.add.collider(this.player, this.wallEnds)
 		this.physics.add.collider(this.player, this.appliances)
 		var activateOverlap = this.physics.add.overlap(this.player.bounds, this.appliances, this.turnOn, null, this)
 		
@@ -86,6 +91,38 @@ export default class RoomScene extends Phaser.Scene {
 				this.registry.values.mode = 'normal'
 				this.tileHighlighter.setVisible(true)
 				this.phantom.destroy()
+			} else if(pointer.leftButtonDown() && this.registry.values.mode == 'placewall'){
+				this.addWallend(this.phantom.texture.key, Util.wallify(pointer.worldX), Util.wallify(pointer.worldY))
+				this.registry.values.mode = 'placewallsegment'
+				this.end = [Util.wallify(pointer.worldX), Util.wallify(pointer.worldY)]
+				this.tileHighlighter.setVisible(true)
+				this.events.emit('placewallsegmentevent', this.phantom.texture.key + '-segment')
+			} else if(pointer.leftButtonDown() && this.registry.values.mode == 'placewallsegment'){
+				for(var i = 0; i < this.phantom.children.size; i++){
+					var crossWall = this.wallExists(this.phantom.children.entries[i].x, this.phantom.children.entries[i].y)
+					if(this.phantom.children.entries[i].visible){
+						if(crossWall === null){
+							var newWall = new Phaser.GameObjects.Image(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
+							newWall.alpha = 1
+							newWall.rotation = this.phantom.children.entries[i].rotation
+							this.walls.add(newWall, true)
+						}
+						else if (crossWall !== null && (Math.abs(crossWall.rotation - this.phantom.children.entries[i].rotation) >= 1*Math.PI/180)){
+							var newWall = new Phaser.GameObjects.Image(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
+							newWall.alpha = 1
+							newWall.rotation = this.phantom.children.entries[i].rotation
+							this.walls.add(newWall, true)
+							this.addWallend(this.phantom.children.entries[i].texture.key.split("-segment")[0], this.phantom.children.entries[i].x, this.phantom.children.entries[i].y)
+						}
+					}
+				}
+				this.addWallend(this.phantom.children.entries[0].texture.key.split("-segment")[0], this.walls.getLast(true, false).x, this.walls.getLast(true, false).y)
+				this.registry.values.mode = 'normal'
+				this.tileHighlighter.setVisible(true)
+				this.phantom.children.iterate((child) =>{
+					this.phantom.remove(child, true, true)
+				})
+				this.phantom.destroy()
 			}
 		}, this)
 
@@ -95,19 +132,36 @@ export default class RoomScene extends Phaser.Scene {
 			this.phantom.alpha = 0.6
 			this.tileHighlighter.setVisible(false)
 		}, this)
+		
+		this.scene.get('ui-scene').events.on('placewallevent', function(key){
+			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
+			this.phantom = this.add.image(0,0,key)
+			this.phantom.alpha = 0.6
+			this.tileHighlighter.setVisible(false)
+		}, this)
+
+		this.events.on('placewallsegmentevent', function(key){
+			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
+			this.phantom = this.physics.add.staticGroup()
+			this.phantom.add(this.add.image(0,0,key))
+			this.phantom.children.entries[0].alpha = 0.6
+			this.tileHighlighter.setVisible(false)
+		}, this)
 	}
 
 	update(){
 		//update ui
 		this.cameras.main.centerOn(this.player.x, this.player.y)
 
-		//mode change
 		if(this.registry.values.mode == 'place'){
 			this.drawPhantomAtCursor()	
-		} else{
+		} else if (this.registry.values.mode == 'placewall'){
+			this.drawPhantomWallAtCursor()
+		} else if (this.registry.values.mode == 'placewallsegment'){
+			this.drawPhantomWallSegmentsAtCursor(this.end[0], this.end[1])
+		} else {
 			this.highlightTile()
 		}
-
 		//keyboard input
 		if(Phaser.Input.Keyboard.JustDown(e)){
 			this.appliances.children.iterate((child) =>{
@@ -246,24 +300,66 @@ export default class RoomScene extends Phaser.Scene {
 		}
 	}
 
+
 	removeAppliance(x,y, appliance){
 		this.appliances.remove(appliance, true, true)
 	}
 
 	initWalls(){
-		const walls = this.physics.add.staticGroup()//{
-		// 	key: WALL_KEY,
-		// 	repeat: 2,
-		// 	setXY: {x: 40, y:400, stepX: 64}
-		// })
-		// walls.setDepth(1)
+		const walls = this.physics.add.staticGroup()
+		walls.setDepth(2)
 		return walls
+	}
+
+	initWallEnds(){
+		const wallEnds = this.physics.add.staticGroup()
+		wallEnds.setDepth(3)
+		return wallEnds
+	}
+
+	addWallend(key, x, y){
+		if(this.wallEndExists(x, y) === null) {
+			console.log("add end")
+			var wallend = new Phaser.GameObjects.Image(this, x, y, key)
+			wallend.setDepth(3)
+			this.wallEnds.add(wallend, true)
+		}
+	}
+
+	wallExists(x, y){
+		//console.log(`x: ${x}, y: ${y}`)
+		var cross = null
+		if(this.walls.children.size > 0 ){
+			for (var i = this.walls.children.size - 1; i >= 0; i--) {
+				if(Util.threshold(this.walls.children.entries[i].x, x, 0.01) && Util.threshold(this.walls.children.entries[i].y, y, 0.01)){
+					cross = this.walls.children.entries[i]
+				}
+			}
+			return cross
+		} else{
+			return null
+		}
+	}
+
+	wallEndExists(x, y){
+		//console.log(`x: ${x}, y: ${y}`)
+		var cross = null
+		if(this.wallEnds.children.size > 0 ){
+			for (var i = this.wallEnds.children.size - 1; i >= 0; i--) {
+				if(Util.threshold(this.wallEnds.children.entries[i].x, x, 0.01) && Util.threshold(this.wallEnds.children.entries[i].y, y, 0.01)){
+					cross = this.wallEnds.children.entries[i]
+				}
+			}
+			return cross
+		} else{
+			return null
+		}
 	}
 
 	initPlayer(){
 		const player = this.physics.add.sprite(Util.gridify(100),Util.gridify(450), DUDE_KEY)
 		player.bounds = this.physics.add.sprite(player.body.x, player.body.y, 'playerbounds')
-		player.bounds.body.setSize(Util.tile_size,50)
+		player.bounds.body.setSize(Util.tile_size, 20)
 		player.bounds.setVisible(false)
 
 		player.setCollideWorldBounds(true)
@@ -280,12 +376,12 @@ export default class RoomScene extends Phaser.Scene {
 		})
 		this.anims.create({
 			key: 'down',
-			frames: [{key: DUDE_KEY, frame: 2}],
+			frames: [{key: DUDE_KEY, frame: 3}],
 			frameRate: 20
 		})
 		this.anims.create({
 			key: 'right',
-			frames: [{key: DUDE_KEY, frame: 3}],
+			frames: [{key: DUDE_KEY, frame: 2}],
 			frameRate: 20
 		})
 
@@ -294,19 +390,59 @@ export default class RoomScene extends Phaser.Scene {
 
 	highlightTile(){
 		var pointer = this.input.activePointer
+		pointer.updateWorldPoint(this.cameras.main)
 		this.tileHighlighter.setX(Util.gridify(pointer.worldX))
 		this.tileHighlighter.setY(Util.gridify(pointer.worldY))
 	}
 
 	drawPhantomAtCursor(){
 		var pointer = this.input.activePointer
+		pointer.updateWorldPoint(this.cameras.main)
 		this.phantom.setX(Util.gridify(pointer.worldX))
 		this.phantom.setY(Util.gridify(pointer.worldY))
+	}
+
+	drawPhantomWallAtCursor(){
+		var pointer = this.input.activePointer
+		pointer.updateWorldPoint(this.cameras.main)
+		this.phantom.setX(Util.wallify(pointer.worldX))
+		this.phantom.setY(Util.wallify(pointer.worldY))
+	}
+	drawPhantomWallSegmentsAtCursor(endX, endY, key){
+		var pointer = this.input.activePointer
+		pointer.updateWorldPoint(this.cameras.main)
+		var dist = Util.distance(endX, endY, Util.wallify(pointer.worldX), Util.wallify(pointer.worldY))
+		var rot = Util.getAngle(endX, endY, pointer.worldX, pointer.worldY)
+		this.phantom.children.iterate((child) =>{
+			child.rotation = rot
+		})
+		var segments = Math.floor(dist/Util.tile_size) + 1
+
+		if(segments > this.phantom.children.size){
+			for (var i = segments - this.phantom.children.size - 1; i >= 0; i--) {
+				this.phantom.add(this.add.image(0, 0, this.phantom.children.entries[0].texture.key))
+			}
+		}
+
+		for (i = 0; i < segments; i++) {
+			var x = endX + (Util.tile_size * i * Math.sin(rot))
+			var y = endY + (Util.tile_size * i * -Math.cos(rot))
+			this.phantom.children.entries[i].setVisible(true)
+			this.phantom.children.entries[i].alpha = 0.6
+			this.phantom.children.entries[i].setX(x)
+			this.phantom.children.entries[i].setY(y)
+		}
+		for (i = this.phantom.children.size - 1; i >= segments; i--) {
+			this.phantom.children.entries[i].setVisible(false)
+		}
 	}
 
 	destroy(){
 		appliances.children.iterate((child) =>{
 			this.appliances.remove(child, true, true)
+		})
+		walls.children.iterate((child) =>{
+			this.walls.remove(child, true, true)
 		})
 	}
 
