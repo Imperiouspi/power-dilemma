@@ -6,7 +6,8 @@ export default class TVObject extends ApplianceObject {
 		super(x,y,scene, 'tv')
 		this.key = 'tv'
 		this.animKey = 'tv'
-		this.powerUse = 2
+		this.powerUse = 7
+		this.cost = 600
 	}
 
 }

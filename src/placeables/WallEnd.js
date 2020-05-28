@@ -1,15 +1,16 @@
 import Phaser from 'phaser'
 
-export default class WallObject extends Phaser.GameObjects.Image {
+export default class WallEndObject extends Phaser.GameObjects.Image {
 	constructor(scene, x,y, key){
 		super(scene, x,y, key)
-		this.type = 'wall'
+		this.type = 'wallend'
 		this.cost = 0
 		this.scene.registry.values.balance -= this.cost
 
 		this.setInteractive();
 		this.on('pointerdown', function(pointer){
-			if(this.scene.registry.values.mode == 'delete'){this.scene.sellWall(pointer.x, pointer.y, this)}
+			console.log('thing')
+			if(this.scene.registry.values.mode == 'delete'){this.scene.sellWallEnd(pointer.x, pointer.y, this)}
 		}, this)
 
 		this.on('pointerover', function(pointer){

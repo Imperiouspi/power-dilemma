@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 
 export default class ApplianceObject extends Phaser.GameObjects.Sprite {
-	constructor(x,y,scene, key){
+	constructor(x, y, scene, key){
 		super(scene, x,y, key)
 		this.key = key
 		this.type = 'appliance'
@@ -9,11 +9,22 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 		this.animKey = 'oven'
 		this.powerUse = 1
 		this.cost = 100
-		this.scene.registry.values.balance -= this.cost
 
 		this.setInteractive();
 		this.on('pointerdown', function(pointer){
-			this.scene.removeAppliance(pointer.x, pointer.y, this)
+			if (this.scene.registry.values.mode == 'delete'){
+				this.scene.sellAppliance(pointer.x, pointer.y, this)
+			} else if ((this.scene.registry.values.mode != 'placewall')||(this.scene.registry.values.mode != 'placewallsegment')){
+				this.scene.storeAppliance(pointer.x, pointer.y, this)
+			}
+		}, this)
+
+		this.on('pointerover', function(pointer){
+			if(this.scene.registry.values.mode == 'delete'){this.tint = 0xdd0000}
+		}, this)
+
+		this.on('pointerout', function(pointer){
+			this.tint = 0xffffff
 		}, this)
 	}
 
@@ -35,7 +46,6 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 	destroy(){
 		try{
 			if(this.activated){this.scene.registry.values.power -= this.powerUse}
-			this.scene.registry.values.balance += this.cost
 			super.destroy()
 		}
 		catch(err){

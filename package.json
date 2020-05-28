@@ -30,6 +30,7 @@
 		"lib": "^4.1.4",
 		"mocha": "^7.1.2",
 		"phaser": "^3.22.0",
+		"phaser3-rex-plugins": "^1.1.15",
 		"ui": "^0.2.4"
 	},
 	"parcelCleanPaths": [

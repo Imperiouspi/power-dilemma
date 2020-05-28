@@ -6,7 +6,8 @@ export default class MicrowaveObject extends ApplianceObject {
 		super(x,y,scene, 'microwave')
 		this.key = 'microwave'
 		this.animKey = 'microwave'
-		this.powerUse = 1
+		this.powerUse = 8
+		this.cost = 230
 	}
 
 }

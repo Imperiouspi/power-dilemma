@@ -37,15 +37,52 @@ export default class Util{
 	static threshold(a,b,val){
 		return (Math.abs(b-a)<val)
 	}
+
+	static getApplianceCost(key){
+		return Util.ApplianceKeys.indexOf(key) != -1 ? Util.ApplianceCost[Util.ApplianceKeys.indexOf(key)] : 10000
+	}
 }
 
 Util.tile_size = 64
 Util.ApplianceKeys = [
 	'computer',
+	'dishwasher',
+	'dryer',
+	'fan',
 	'fridge',
 	'lamp',
 	'microwave',
 	'oven',
+	'stereo',
 	'toaster',
-	'tv'
+	'tv',
+	'vacuum'
+]
+
+Util.ApplianceCost = [
+	700,400,400,85,1200,100,230,750,450,90,600,380
+]
+
+Util.ApplianceEnergy = [
+	7,10,10,4,12,4,8,9,6,4,7,5
+]
+
+Util.Walls = [
+	'wood'
+]
+
+Util.Objects = [
+	'computer',
+	'dishwasher',
+	'dryer',
+	'fan',
+	'fridge',
+	'lamp',
+	'microwave',
+	'oven',
+	'stereo',
+	'toaster',
+	'tv',
+	'vacuum',
+	'woodwall'
 ]

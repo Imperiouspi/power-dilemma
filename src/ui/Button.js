@@ -14,6 +14,7 @@ export default class Button extends Phaser.GameObjects.Sprite {
 		this.on('pointerout', function(pointer){
 			this.setFrame(0)
 		}, this)
-		this.on('pointerdown', this.activate, this)
+
+		this.on('pointerdown', this.activate)
 	}
 }

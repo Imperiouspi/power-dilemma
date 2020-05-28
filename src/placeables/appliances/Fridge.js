@@ -6,7 +6,8 @@ export default class FridgeObject extends ApplianceObject {
 		super(x,y,scene, 'fridge')
 		this.key = 'fridge'
 		this.animKey = 'fridge'
-		this.powerUse = 2
+		this.powerUse = 12
+		this.cost = 1200
 	}
 
 }

@@ -6,7 +6,8 @@ export default class LampObject extends ApplianceObject {
 		super(x,y,scene, 'lamp')
 		this.key = 'lamp'
 		this.animKey = 'lamp'
-		this.powerUse = 1
+		this.powerUse = 4
+		this.cost = 100
 	}
 
 }

@@ -6,7 +6,8 @@ export default class ToasterObject extends ApplianceObject {
 		super(x,y,scene, 'toaster')
 		this.key = 'toaster'
 		this.animKey = 'toaster'
-		this.powerUse = 1
+		this.powerUse = 4
+		this.cost = 90
 	}
 
 }

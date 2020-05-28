@@ -1,16 +1,24 @@
 import Phaser from 'phaser'
 import ApplianceObject from '../placeables/appliances/Appliance'
 import ComputerObject from '../placeables/appliances/Computer'
+import DryerObject from '../placeables/appliances/Dryer'
+import DishwasherObject from '../placeables/appliances/Dishwasher'
+import FanObject from '../placeables/appliances/Fan'
 import FridgeObject from '../placeables/appliances/Fridge'
 import LampObject from '../placeables/appliances/Lamp'
 import MicrowaveObject from '../placeables/appliances/Microwave'
 import OvenObject from '../placeables/appliances/Oven'
+import StereoObject from '../placeables/appliances/Stereo'
 import ToasterObject from '../placeables/appliances/Toaster'
 import TVObject from '../placeables/appliances/TV'
-import Util from "../Util"
+import VacuumObject from '../placeables/appliances/Vacuum'
 
-const width = 800
-const height = 600
+import Util from "../Util"
+import WallEndObject from '../placeables/WallEnd'
+import WallObject from '../placeables/Wall'
+
+const width = 1472
+const height = 1472
 const tile_colour = 0x33ff33
 const tile_alpha = 0.6
 
@@ -34,8 +42,7 @@ export default class RoomScene extends Phaser.Scene {
 	}
 
 	preload(){
-		this.load.image('floor', 'assets/Map Floor.png')
-		this.load.image('walls', 'assets/Map Walls.png')
+		this.load.image('floor', 'assets/Map.png')
 		this.load.image('playerbounds', 'assets/demo/blankx64.png')
 
 		for (var i = Util.ApplianceKeys.length - 1; i >= 0; i--) {
@@ -61,7 +68,13 @@ export default class RoomScene extends Phaser.Scene {
 		this.cameras.main.setZoom(1)
 		this.add.image(width/2,height/2, 'floor')
 		//this.add.image(width/2,height/2, 'walls')
-
+		var bounds = this.physics.add.staticGroup()
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, 6.5*64/2, 3*64, 6.5*64, 6*64)))
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, width/2, 2*64, 10*64, 4*64)))
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, 23*64-6.5*64/2, 3*64, 6.5*64, 6*64)))
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, 64/2, 6*64 + 16*64/2, 1*64, 16*64)))
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, 22*64+64/2, 6*64 + 16*64/2, 1*64, 16*64)))
+		bounds.add(this.add.existing(new Phaser.GameObjects.Rectangle(this, width/2, height-32, 23*64, 64)))
 		this.registry.set('mode', 'normal')
 		this.tileHighlighter = new Phaser.GameObjects.Rectangle(this, 0, 0, Util.tile_size, Util.tile_size, tile_colour, tile_alpha)
 		this.add.existing(this.tileHighlighter)
@@ -74,11 +87,11 @@ export default class RoomScene extends Phaser.Scene {
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
 		
-		
 		//Setup Physics
 		this.physics.add.collider(this.player, this.walls)
 		this.physics.add.collider(this.player, this.wallEnds)
 		this.physics.add.collider(this.player, this.appliances)
+		this.physics.add.collider(this.player, bounds)
 		var activateOverlap = this.physics.add.overlap(this.player.bounds, this.appliances, this.turnOn, null, this)
 		
 		//Add input handlers
@@ -102,15 +115,21 @@ export default class RoomScene extends Phaser.Scene {
 					var crossWall = this.wallExists(this.phantom.children.entries[i].x, this.phantom.children.entries[i].y)
 					if(this.phantom.children.entries[i].visible){
 						if(crossWall === null){
-							var newWall = new Phaser.GameObjects.Image(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
+							var newWall = new WallObject(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
 							newWall.alpha = 1
 							newWall.rotation = this.phantom.children.entries[i].rotation
+							if(!Util.threshold(newWall.rotation, 0, 0.01)){
+								newWall.setSize(newWall.height, newWall.width)
+							}
 							this.walls.add(newWall, true)
 						}
 						else if (crossWall !== null && (Math.abs(crossWall.rotation - this.phantom.children.entries[i].rotation) >= 1*Math.PI/180)){
-							var newWall = new Phaser.GameObjects.Image(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
+							var newWall = new WallObject(this, this.phantom.children.entries[i].x, this.phantom.children.entries[i].y, this.phantom.children.entries[i].texture.key)
 							newWall.alpha = 1
 							newWall.rotation = this.phantom.children.entries[i].rotation
+							if(!Util.threshold(newWall.rotation, 0, 0.01)){
+								newWall.setSize(newWall.height, newWall.width)
+							}
 							this.walls.add(newWall, true)
 							this.addWallend(this.phantom.children.entries[i].texture.key.split("-segment")[0], this.phantom.children.entries[i].x, this.phantom.children.entries[i].y)
 						}
@@ -119,10 +138,7 @@ export default class RoomScene extends Phaser.Scene {
 				this.addWallend(this.phantom.children.entries[0].texture.key.split("-segment")[0], this.walls.getLast(true, false).x, this.walls.getLast(true, false).y)
 				this.registry.values.mode = 'normal'
 				this.tileHighlighter.setVisible(true)
-				this.phantom.children.iterate((child) =>{
-					this.phantom.remove(child, true, true)
-				})
-				this.phantom.destroy()
+				this.phantom.destroy(true)
 			}
 		}, this)
 
@@ -132,7 +148,7 @@ export default class RoomScene extends Phaser.Scene {
 			this.phantom.alpha = 0.6
 			this.tileHighlighter.setVisible(false)
 		}, this)
-		
+
 		this.scene.get('ui-scene').events.on('placewallevent', function(key){
 			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
 			this.phantom = this.add.image(0,0,key)
@@ -298,10 +314,42 @@ export default class RoomScene extends Phaser.Scene {
 		else if(key == 'tv'){
 			this.appliances.add(new TVObject(x, y, this), true)
 		}
+		else if(key == 'dishwasher'){
+			this.appliances.add(new DishwasherObject(x,y,this), true)
+		}
+		else if(key == 'dryer'){
+			this.appliances.add(new DryerObject(x,y,this), true)
+		}
+		else if(key == 'fan'){
+			this.appliances.add(new FanObject(x,y,this), true)
+		}
+		else if(key == 'stereo'){
+			this.appliances.add(new StereoObject(x,y,this), true)
+		}
+		else if(key == 'vacuum'){
+			this.appliances.add(new VacuumObject(x,y,this), true)
+		}
+		this.registry.set(key, this.registry.get(key) - 1)
 	}
 
 
-	removeAppliance(x,y, appliance){
+	sellAppliance(x,y, appliance){
+		this.registry.values.balance += appliance.cost
+		this.appliances.remove(appliance, true, true)
+	}
+
+	sellWall(x,y,wall){
+		this.registry.values.balance += wall.cost
+		this.walls.remove(wall, true, true)
+	}
+
+	sellWallEnd(x,y,wallEnd){
+		this.registry.values.balance += wallEnd.cost
+		this.wallEnds.remove(wallEnd, true, true)
+	}
+
+	storeAppliance(x, y, appliance){
+		this.registry.set(appliance.key, this.registry.get(appliance.key) + 1)
 		this.appliances.remove(appliance, true, true)
 	}
 
@@ -320,7 +368,7 @@ export default class RoomScene extends Phaser.Scene {
 	addWallend(key, x, y){
 		if(this.wallEndExists(x, y) === null) {
 			console.log("add end")
-			var wallend = new Phaser.GameObjects.Image(this, x, y, key)
+			var wallend = new WallEndObject(this, x, y, key)
 			wallend.setDepth(3)
 			this.wallEnds.add(wallend, true)
 		}
