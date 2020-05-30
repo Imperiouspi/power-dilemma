@@ -10,7 +10,7 @@ import {Viewport} from 'phaser-ui-tools'
 import {Column} from 'phaser-ui-tools'
 import Button from '../ui/Button'
 
-const startingBalance = 999.00
+const startingBalance = 10000.00
 const powerCost = 1
 var biller
 var storageOrigin = 225
@@ -37,8 +37,8 @@ export default class UIScene extends Phaser.Scene
 		//load shop assets
 		this.load.spritesheet('shopicon', 'assets/icon-shop.png',
 			{ frameWidth: 64, frameHeight: 64 })
-		this.load.image('shop', 'assets/Shop Screen.png')
-		this.load.spritesheet('gen', 'assets/Icon-Generation.png',
+		this.load.spritesheet('shop', 'assets/Shop Screen.png', {frameWidth: 128, frameHeight: 260})
+		this.load.spritesheet('genicon', 'assets/Icon-Generation.png',
 			{ frameWidth: 64, frameHeight: 64 })
 		this.load.spritesheet('storageicon', 'assets/icon-storage.png',
 			{ frameWidth: 64, frameHeight: 64 })
@@ -48,7 +48,8 @@ export default class UIScene extends Phaser.Scene
 			{ frameWidth: 64, frameHeight: 64 })
 		this.load.spritesheet('applianceicon', 'assets/Icon-Appliances.png',
 			{frameWidth: 64, frameHeight: 64})
-
+		this.load.spritesheet('deleteicon', 'assets/Icon-Delete.png',
+			{frameWidth: 64, frameHeight: 64})
 		this.load.image('track', 'assets/demo/track.png')
 		this.load.spritesheet('bar', 
 			'assets/demo/bar.png',
@@ -77,8 +78,12 @@ export default class UIScene extends Phaser.Scene
 		shopButton.storeon = false
 		this.add.existing(shopButton)
 
-		var genButton = new Button(this, 150, 535, 'gen', function(){
-			console.log('open gen')
+		var genButton = new Button(this, 150, 535, 'genicon', function(){
+			this.scene.scene.switch('gen-scene')
+		})
+		this.add.existing(genButton)
+
+		var deleteButton = new Button(this, 225, 535, 'deleteicon', function(){
 			if(this.scene.registry.values.mode == 'normal'){
 				this.scene.registry.values.mode = 'delete'
 				this.scene.scene.get('room-scene').tileHighlighter.fillColor = 0xff3333
@@ -87,12 +92,17 @@ export default class UIScene extends Phaser.Scene
 				this.scene.scene.get('room-scene').tileHighlighter.fillColor = 0x33ff33
 			}
 		})
-		this.add.existing(genButton)
+		this.add.existing(deleteButton)
 
-		var profileButton = new Button(this, 645, 515, 'applianceicon', function(){
-			console.log('open profile')
+		var applianceButton = new Button(this, 645, 515, 'applianceicon', function(){
+			this.storeon = !this.storeon
+			this.scene.storage.setVisible(this.storeon)
+			this.scene.storage.active = this.storeon
+			this.scene.storageScroll.setVisible(this.storeon)
+			this.scene.storageScroll.active = this.storeon
 		})
-		this.add.existing(profileButton)
+		applianceButton.storeon = false
+		this.add.existing(applianceButton)
 
 		var settingsButton = new Button(this, 715, 515, 'settings', function(){
 			console.log('open settings')
@@ -102,17 +112,12 @@ export default class UIScene extends Phaser.Scene
 		//storage
 		this.initstorage()
 		var storageButton = new Button(this, 575, 515, 'storageicon', function(){
-			this.storeon = !this.storeon
-			this.scene.storage.setVisible(this.storeon)
-			this.scene.storage.active = this.storeon
-			this.scene.storageScroll.setVisible(this.storeon)
-			this.scene.storageScroll.active = this.storeon
+			console.log('open furniture')
 		}, this)
 		this.add.existing(storageButton)
-		storageButton.storeon = false
 
 		for (var i = Util.Objects.length - 1; i >= 0; i--) {
-			this.registry.set(Util.Objects[i], '0')
+			this.registry.set(Util.Objects[i], '1')
 		}
 
 		for (var i = Util.Objects.length - 1; i >= 0; i--) {
@@ -149,14 +154,15 @@ export default class UIScene extends Phaser.Scene
 		})(this),1000)
 
 		this.registry.events.on('changedata-balance', function(){
-			if(this.registry.values.balance <= 0){this.moneyBar.emit('broke', this)}
+			if(this.registry.values.balance <= 0){this.moneyBar.emit('broke', this)
+				this.moneyBar.updateBalance()}
 			else{this.moneyBar.updateBalance()}
 		}, this)
 
 		this.moneyBar.on('broke', function(scene){
 			console.log('broke')
-			//clearInterval(biller)
-			//Util.lose('broke', scene) //Uncomment for lose
+			// clearInterval(biller)
+			// Util.lose('broke', scene) //Uncomment for lose
 		}, this)
 
 	}
@@ -213,5 +219,10 @@ export default class UIScene extends Phaser.Scene
 
 	update(){
 		this.uiplacer.text = `${this.input.activePointer.worldX}, ${this.input.activePointer.worldY}`
+		if(this.registry.values.balance < 0){
+			this.moneyBar.setColor('red')
+		} else {
+			this.moneyBar.setColor('black')
+		}
 	}
 }

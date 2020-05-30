@@ -6,9 +6,7 @@ import Util from '../Util'
 export default class ShopBox extends Viewport{
 	constructor(scene, x, y, width, height){
 		super(scene, x, y, width, height)
-
 		var column = new Column(this.scene)
-
 		this.addNode(column)
 
 		for (var i = 0; i < Util.ApplianceKeys.length; i++) {

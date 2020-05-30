@@ -8,7 +8,7 @@ export default class LoseScene extends Phaser.Scene
 	}
 
 	create(){
-		var loseText = new Phaser.GameObjects.Text(this, 300, 400, this.registry.values.lose, { fontSize: '32px', fill: '#fff' })
+		var loseText = new Phaser.GameObjects.Text(this, 100, 300, `You lose! Cause: ${this.registry.values.lose}`, { fontSize: '32px', fill: '#fff' })
 		this.add.existing(loseText)
 	}
 }
