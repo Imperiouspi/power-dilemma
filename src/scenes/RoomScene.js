@@ -33,7 +33,7 @@ var e
 
 export default class RoomScene extends Phaser.Scene {
 	constructor(){
-		super({key: 'room-scene', active: true})
+		super({key: 'room-scene', active: false})
 
 		this.player = undefined
 		this.cursors = undefined
@@ -50,6 +50,9 @@ export default class RoomScene extends Phaser.Scene {
 				`assets/${Util.ApplianceKeys[i]}.png`,
 				{frameWidth: 64, frameHeight: 64}
 			)
+		}
+		for (var i = Util.FurnitureKeys.length - 1; i >= 0; i--) {
+			this.load.image(Util.FurnitureKeys[i], `assets/Furniture-${Util.capitalize(Util.FurnitureKeys[i])}.png`)
 		}
 		this.load.image('woodwall-segment', 'assets/demo/wall-segment.png')
 		this.load.image('woodwall', 'assets/demo/wall-end.png')
@@ -86,21 +89,30 @@ export default class RoomScene extends Phaser.Scene {
 		this.wallEnds = this.initWallEnds()
 		this.player = this.initPlayer()
 		this.appliances = this.initAppliances()
+		this.furniture = this.initFurniture()
 		
 		//Setup Physics
 		this.physics.add.collider(this.player, this.walls)
 		this.physics.add.collider(this.player, this.wallEnds)
 		this.physics.add.collider(this.player, this.appliances)
+		this.physics.add.collider(this.player, this.furniture)
 		this.physics.add.collider(this.player, bounds)
 		var activateOverlap = this.physics.add.overlap(this.player.bounds, this.appliances, this.turnOn, null, this)
 		
 		//Add input handlers
-		this.cursors = this.input.keyboard.createCursorKeys()
+		this.cursors2 = this.input.keyboard.createCursorKeys()
+		this.cursors = this.input.keyboard.addKeys({up:Phaser.Input.Keyboard.KeyCodes.W,down:Phaser.Input.Keyboard.KeyCodes.S,left:Phaser.Input.Keyboard.KeyCodes.A,right:Phaser.Input.Keyboard.KeyCodes.D})
+		
 		e = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
 
 		this.input.on('pointerdown', function(pointer) {
 			if(pointer.leftButtonDown() && this.registry.values.mode == 'place'){
 				this.addAppliance(this.phantom.texture.key, Util.gridify(pointer.worldX), Util.gridify(pointer.worldY))
+				this.registry.values.mode = 'normal'
+				this.tileHighlighter.setVisible(true)
+				this.phantom.destroy()
+			} else if(pointer.leftButtonDown() && this.registry.values.mode == 'placefurniture'){
+				this.furniture.add(this.add.image(Util.gridify(pointer.worldX), Util.gridify(pointer.worldY), this.phantom.texture.key))
 				this.registry.values.mode = 'normal'
 				this.tileHighlighter.setVisible(true)
 				this.phantom.destroy()
@@ -149,6 +161,13 @@ export default class RoomScene extends Phaser.Scene {
 			this.tileHighlighter.setVisible(false)
 		}, this)
 
+		this.scene.get('ui-scene').events.on('placefurnitureevent', function(key){
+			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
+			this.phantom = this.add.image(0,0,key)
+			this.phantom.alpha = 0.6
+			this.tileHighlighter.setVisible(false)
+		}, this)
+
 		this.scene.get('ui-scene').events.on('placewallevent', function(key){
 			if(typeof this.phantom !== "undefined") {this.phantom.destroy()}
 			this.phantom = this.add.image(0,0,key)
@@ -170,6 +189,8 @@ export default class RoomScene extends Phaser.Scene {
 		this.cameras.main.centerOn(this.player.x, this.player.y)
 
 		if(this.registry.values.mode == 'place'){
+			this.drawPhantomAtCursor()	
+		} else if(this.registry.values.mode == 'placefurniture'){
 			this.drawPhantomAtCursor()	
 		} else if (this.registry.values.mode == 'placewall'){
 			this.drawPhantomWallAtCursor()
@@ -194,22 +215,22 @@ export default class RoomScene extends Phaser.Scene {
 		}
 
 		//Player movement: Move player, move bounding box
-		if(this.cursors.left.isDown){
+		if(this.cursors.left.isDown || this.cursors2.left.isDown){
 			this.player.setVelocityX(-speed)
 			this.player.anims.play('left',true)
 		}
-		else if(this.cursors.right.isDown){
+		else if(this.cursors.right.isDown || this.cursors2.right.isDown){
 			this.player.setVelocityX(speed)
 			this.player.anims.play('right',true)
 		}
 		else {
 			this.player.setVelocityX(0)
 		}
-		if(this.cursors.up.isDown){
+		if(this.cursors.up.isDown || this.cursors2.up.isDown){
 			this.player.setVelocityY(-speed)
 			this.player.anims.play('up',true)
 		}
-		else if(this.cursors.down.isDown){
+		else if(this.cursors.down.isDown || this.cursors2.down.isDown){
 			this.player.setVelocityY(speed)
 			this.player.anims.play('down',true)
 		}
@@ -290,6 +311,11 @@ export default class RoomScene extends Phaser.Scene {
 			child.activated = false
 		})
 		return appliances
+	}
+
+	initFurniture(){
+		const furniture = this.physics.add.staticGroup()
+		return furniture
 	}
 
 	addAppliance(key, x,y){

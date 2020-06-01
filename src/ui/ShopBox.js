@@ -10,7 +10,7 @@ export default class ShopBox extends Viewport{
 		this.addNode(column)
 
 		for (var i = 0; i < Util.ApplianceKeys.length; i++) {
-			var ob = this.scene.add.image(32,0, Util.ApplianceKeys[i])
+			var ob = this.scene.add.image(32, 0, Util.ApplianceKeys[i])
 
 			ob.setInteractive()
 			var scene = this.scene

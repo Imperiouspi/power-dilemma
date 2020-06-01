@@ -41,7 +41,45 @@ export default class Util{
 	static getApplianceCost(key){
 		return Util.ApplianceKeys.indexOf(key) != -1 ? Util.ApplianceCost[Util.ApplianceKeys.indexOf(key)] : 10000
 	}
+
+	static genIndex(key){
+		if(key == 'coal'){
+			return 0
+		}
+		if(key == 'hydro'){
+			return 1
+		}
+		if(key == 'solar'){
+			return 2
+		}
+		if(key == 'wind'){
+			return 3
+		}
+	}
+
+	static capitalize(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 }
+Util.genKeys = [
+	'coal', 'hydro', 'solar', 'wind'
+]
+
+Util.genStrength = [
+	25, 20, 5, 7
+]
+
+Util.genCost = [
+	5, 8, 16, 10
+]
+
+Util.genMax = [
+	1000, 3, 10000, 10
+]
+
+Util.genPollute = [
+	1, 0, 0, 0
+]
 
 Util.tile_size = 64
 Util.ApplianceKeys = [
@@ -59,6 +97,13 @@ Util.ApplianceKeys = [
 	'vacuum'
 ]
 
+Util.FurnitureKeys = [
+	'chair',
+	'couch',
+	'counter',
+	'table'
+]
+
 Util.ApplianceCost = [
 	700,400,400,85,1200,100,230,750,450,90,600,380
 ]
@@ -71,18 +116,10 @@ Util.Walls = [
 	'wood'
 ]
 
-Util.Objects = [
-	'computer',
-	'dishwasher',
-	'dryer',
-	'fan',
-	'fridge',
-	'lamp',
-	'microwave',
-	'oven',
-	'stereo',
-	'toaster',
-	'tv',
-	'vacuum',
+Util.staticObjects= [
+	'chair',
+	'couch',
+	'counter',
+	'table',
 	'woodwall'
 ]
