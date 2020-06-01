@@ -6,7 +6,8 @@ import GenScene from './scenes/GenScene'
 import StartScene from './scenes/StartScene'
 
 const config = {
-	type: Phaser.AUTO,
+	type: Phaser.CANVAS,
+	mode: Phaser.Scale.FIT,
 	width: 800,
 	height: 600,
 	background: 0x00ff00,

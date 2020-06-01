@@ -1,0 +1,13 @@
+body {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+
+#title {
+	background-image: blue;
+}
+
+canvas {
+	width: 100px;
+}
