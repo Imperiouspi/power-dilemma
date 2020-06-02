@@ -10,7 +10,7 @@ export default class ApplianceObject extends Phaser.GameObjects.Sprite {
 		this.powerUse = 1
 		this.cost = 100
 
-		this.setInteractive();
+		this.setInteractive()
 		this.on('pointerdown', function(pointer){
 			if (this.scene.registry.values.mode == 'delete'){
 				this.scene.sellAppliance(pointer.x, pointer.y, this)

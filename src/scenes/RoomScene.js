@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import ApplianceObject from '../placeables/appliances/Appliance'
+import FurnitureObject from '../placeables/Furniture'
 import ComputerObject from '../placeables/appliances/Computer'
 import DryerObject from '../placeables/appliances/Dryer'
 import DishwasherObject from '../placeables/appliances/Dishwasher'
@@ -112,7 +113,9 @@ export default class RoomScene extends Phaser.Scene {
 				this.tileHighlighter.setVisible(true)
 				this.phantom.destroy()
 			} else if(pointer.leftButtonDown() && this.registry.values.mode == 'placefurniture'){
-				this.furniture.add(this.add.image(Util.gridify(pointer.worldX), Util.gridify(pointer.worldY), this.phantom.texture.key))
+				var furn = new FurnitureObject(this, Util.gridify(pointer.worldX), Util.gridify(pointer.worldY), this.phantom.texture.key)
+				this.add.existing(furn)
+				this.furniture.add(furn)
 				this.registry.values.mode = 'normal'
 				this.tileHighlighter.setVisible(true)
 				this.phantom.destroy()
